@@ -1,0 +1,11 @@
+[SCAFFOLD — Replace with finalized product scenario, plain-language requirements, and instructions.]
+
+You are a compliance expert. Generate a Digital Product Passport (DPP) for the following product.
+
+PRODUCT:
+[Product details]
+
+KEY REQUIREMENTS (plain-language summary):
+[Plain-language DPP/AAS submodel requirements.]
+
+Generate the DPP as a structured JSON document according to the Asset Administration Shell (AAS) submodel format that explicitly addresses each of the listed requirements. The output must be a valid JSON object only — no prose outside the JSON.

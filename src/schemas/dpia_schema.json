@@ -1,0 +1,204 @@
+{
+  "schema_id": "gdpr_dpia_v1",
+  "version": "1.0",
+  "description": "DPIA required fields per GDPR Article 35(7)",
+  "regulation": "GDPR (EU) 2016/679, Article 35(7)",
+  "fields": [
+    {
+      "id": "processing_description",
+      "label": "Systematic Description of Processing Operations",
+      "article_ref": "35(7)(a)",
+      "required": true,
+      "description": "A systematic description of the envisaged processing operations and the purposes of the processing, including where applicable the legitimate interest pursued by the controller.",
+      "subfields": [
+        {
+          "id": "processing_description.nature",
+          "label": "Nature of processing",
+          "required": true
+        },
+        {
+          "id": "processing_description.scope",
+          "label": "Scope of processing",
+          "required": true
+        },
+        {
+          "id": "processing_description.context",
+          "label": "Context of processing",
+          "required": true
+        },
+        {
+          "id": "processing_description.purposes",
+          "label": "Purposes of processing",
+          "required": true
+        },
+        {
+          "id": "processing_description.data_categories",
+          "label": "Categories of personal data processed",
+          "required": true
+        },
+        {
+          "id": "processing_description.data_subjects",
+          "label": "Categories of data subjects",
+          "required": true
+        },
+        {
+          "id": "processing_description.data_flows",
+          "label": "Data flows (collection, storage, transfer, deletion)",
+          "required": true
+        },
+        {
+          "id": "processing_description.recipients",
+          "label": "Recipients or categories of recipients",
+          "required": false
+        },
+        {
+          "id": "processing_description.retention_period",
+          "label": "Retention period",
+          "required": true
+        },
+        {
+          "id": "processing_description.legitimate_interest",
+          "label": "Legitimate interest pursued (if applicable)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "necessity_proportionality",
+      "label": "Assessment of Necessity and Proportionality",
+      "article_ref": "35(7)(b)",
+      "required": true,
+      "description": "An assessment of the necessity and proportionality of the processing operations in relation to the purposes.",
+      "subfields": [
+        {
+          "id": "necessity_proportionality.necessity_justification",
+          "label": "Justification of necessity for the processing",
+          "required": true
+        },
+        {
+          "id": "necessity_proportionality.proportionality_justification",
+          "label": "Justification of proportionality relative to purposes",
+          "required": true
+        },
+        {
+          "id": "necessity_proportionality.lawful_basis",
+          "label": "Lawful basis for processing (Article 6 / Article 9)",
+          "required": true
+        },
+        {
+          "id": "necessity_proportionality.data_minimization",
+          "label": "Data minimization measures",
+          "required": true
+        },
+        {
+          "id": "necessity_proportionality.storage_limitation",
+          "label": "Storage limitation justification",
+          "required": true
+        },
+        {
+          "id": "necessity_proportionality.accuracy_measures",
+          "label": "Measures to ensure data accuracy and quality",
+          "required": false
+        },
+        {
+          "id": "necessity_proportionality.data_subject_rights",
+          "label": "Provisions for data subject rights (access, rectification, erasure, etc.)",
+          "required": true
+        },
+        {
+          "id": "necessity_proportionality.alternatives_considered",
+          "label": "Less privacy-intrusive alternatives considered",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "risk_assessment",
+      "label": "Assessment of Risks to Rights and Freedoms",
+      "article_ref": "35(7)(c)",
+      "required": true,
+      "description": "An assessment of the risks to the rights and freedoms of data subjects.",
+      "subfields": [
+        {
+          "id": "risk_assessment.identified_risks",
+          "label": "Identified risks to data subjects",
+          "required": true
+        },
+        {
+          "id": "risk_assessment.likelihood",
+          "label": "Likelihood of each risk materializing",
+          "required": true
+        },
+        {
+          "id": "risk_assessment.severity",
+          "label": "Severity of harm if each risk materializes",
+          "required": true
+        },
+        {
+          "id": "risk_assessment.overall_risk_level",
+          "label": "Overall risk level (e.g. low / medium / high)",
+          "required": true
+        },
+        {
+          "id": "risk_assessment.vulnerable_groups",
+          "label": "Specific impact on vulnerable groups",
+          "required": false
+        },
+        {
+          "id": "risk_assessment.cross_border_risks",
+          "label": "Risks associated with cross-border transfers",
+          "required": false
+        },
+        {
+          "id": "risk_assessment.automated_decision_risks",
+          "label": "Risks from automated decision-making or profiling",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "risk_mitigation",
+      "label": "Measures to Address Risks",
+      "article_ref": "35(7)(d)",
+      "required": true,
+      "description": "The measures envisaged to address the risks, including safeguards, security measures, and mechanisms to ensure protection of personal data and demonstrate compliance.",
+      "subfields": [
+        {
+          "id": "risk_mitigation.technical_measures",
+          "label": "Technical security measures (encryption, pseudonymisation, access controls, etc.)",
+          "required": true
+        },
+        {
+          "id": "risk_mitigation.organizational_measures",
+          "label": "Organizational measures (policies, training, DPA agreements, etc.)",
+          "required": true
+        },
+        {
+          "id": "risk_mitigation.compliance_mechanisms",
+          "label": "Mechanisms to demonstrate ongoing GDPR compliance",
+          "required": true
+        },
+        {
+          "id": "risk_mitigation.residual_risk",
+          "label": "Residual risk assessment after mitigation measures",
+          "required": true
+        },
+        {
+          "id": "risk_mitigation.dpo_consultation",
+          "label": "DPO advice and consultation outcome",
+          "required": false
+        },
+        {
+          "id": "risk_mitigation.supervisory_authority_consultation",
+          "label": "Prior consultation with supervisory authority (Article 36, if required)",
+          "required": false
+        },
+        {
+          "id": "risk_mitigation.review_schedule",
+          "label": "DPIA review and reassessment schedule",
+          "required": false
+        }
+      ]
+    }
+  ]
+}

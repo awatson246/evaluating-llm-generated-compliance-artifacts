@@ -1,0 +1,44 @@
+# Copy this file to config.yaml and fill in your API keys.
+# config.yaml is gitignored — never commit it.
+
+api_keys:
+  openai: "sk-..."
+  anthropic: "sk-ant-..."
+  huggingface: "hf_..."
+
+models:
+  - provider: openai
+    model_id: gpt-4o
+  - provider: anthropic
+    model_id: claude-3-5-sonnet-20241022
+  - provider: huggingface
+    model_id: meta-llama/Meta-Llama-3-8B-Instruct
+  - provider: huggingface
+    model_id: mistralai/Mistral-7B-Instruct-v0.3
+  - provider: huggingface
+    model_id: HuggingFaceH4/zephyr-7b-beta  # TBD — swap for your 5th model
+
+tasks:
+  - gdpr
+  - espr  # scaffold only — see co-author for ESPR implementation
+
+vagueness_levels:
+  - low
+  - medium
+  - high
+  - baseline
+
+num_runs: 3
+
+# Limit concurrent API calls to avoid rate limits.
+max_concurrent: 5
+
+# Enable dry_run to test your setup with a single condition.
+dry_run:
+  enabled: false
+  model: openai/gpt-4o   # format: provider/model_id
+  task: gdpr
+  vagueness_level: low
+  runs: 1
+
+output_dir: outputs

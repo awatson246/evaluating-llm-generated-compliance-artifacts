@@ -1,0 +1,11 @@
+[SCAFFOLD — Replace with finalized product scenario, regulatory text excerpts, and instructions.]
+
+You are a compliance expert. Generate a Digital Product Passport (DPP) for the following product.
+
+PRODUCT:
+[Product details]
+
+REGULATORY TEXT:
+[ESPR regulatory text excerpts and/or AAS submodel specification]
+
+Generate the DPP as a structured JSON document. Your output must map explicitly to the required AAS submodel fields referenced in the regulatory text above. The output must be a valid JSON object only — no prose outside the JSON.

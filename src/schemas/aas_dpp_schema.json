@@ -1,0 +1,91 @@
+{
+  "_note": "SCAFFOLD — Field definitions to be confirmed and extended against the AAS DPP submodel specification by co-author before use in scoring.",
+  "schema_id": "aas_dpp_v1",
+  "version": "0.1-scaffold",
+  "description": "AAS Submodel schema for Digital Product Passport per ESPR (EU) 2024/1781",
+  "regulation": "ESPR (EU) 2024/1781",
+  "fields": [
+    {
+      "id": "product_identification",
+      "label": "Product Identification",
+      "required": true,
+      "subfields": [
+        { "id": "product_identification.manufacturer",        "label": "Manufacturer name",              "required": true  },
+        { "id": "product_identification.brand",               "label": "Brand name",                     "required": true  },
+        { "id": "product_identification.model",               "label": "Model designation",              "required": true  },
+        { "id": "product_identification.batch_number",        "label": "Batch or serial number",         "required": false },
+        { "id": "product_identification.gtin",                "label": "GTIN / EAN",                     "required": false },
+        { "id": "product_identification.manufacturing_date",  "label": "Manufacturing date",             "required": false },
+        { "id": "product_identification.country_of_origin",   "label": "Country of origin",              "required": true  }
+      ]
+    },
+    {
+      "id": "product_classification",
+      "label": "Product Classification",
+      "required": true,
+      "subfields": [
+        { "id": "product_classification.product_category",    "label": "Product category",               "required": true  },
+        { "id": "product_classification.eclass_code",         "label": "eCl@ss classification code",     "required": false },
+        { "id": "product_classification.un_spsc",             "label": "UN/SPSC code",                   "required": false }
+      ]
+    },
+    {
+      "id": "technical_specifications",
+      "label": "Technical Specifications",
+      "required": true,
+      "subfields": [
+        { "id": "technical_specifications.dimensions",        "label": "Physical dimensions",            "required": false },
+        { "id": "technical_specifications.weight",            "label": "Weight",                         "required": false },
+        { "id": "technical_specifications.energy_class",      "label": "Energy efficiency class",        "required": false },
+        { "id": "technical_specifications.power_consumption", "label": "Power consumption",              "required": false }
+      ]
+    },
+    {
+      "id": "material_composition",
+      "label": "Material Composition",
+      "required": true,
+      "subfields": [
+        { "id": "material_composition.materials",             "label": "List of materials",              "required": true  },
+        { "id": "material_composition.recycled_content",      "label": "Recycled content percentage",    "required": true  },
+        { "id": "material_composition.substances_of_concern", "label": "Substances of very high concern (SVHC)", "required": true  },
+        { "id": "material_composition.hazardous_materials",   "label": "Hazardous materials declaration","required": true  }
+      ]
+    },
+    {
+      "id": "carbon_footprint",
+      "label": "Carbon Footprint",
+      "required": true,
+      "subfields": [
+        { "id": "carbon_footprint.lifecycle_co2",             "label": "Lifecycle CO2 equivalent (kg CO2e)", "required": true  },
+        { "id": "carbon_footprint.manufacturing_co2",         "label": "Manufacturing phase CO2",        "required": false },
+        { "id": "carbon_footprint.use_phase_co2",             "label": "Use phase CO2",                  "required": false },
+        { "id": "carbon_footprint.end_of_life_co2",           "label": "End-of-life phase CO2",          "required": false },
+        { "id": "carbon_footprint.methodology",               "label": "Calculation methodology / standard", "required": true  }
+      ]
+    },
+    {
+      "id": "circularity",
+      "label": "Circularity and End-of-Life",
+      "required": true,
+      "subfields": [
+        { "id": "circularity.repairability_score",            "label": "Repairability score",            "required": true  },
+        { "id": "circularity.recyclability_rate",             "label": "Recyclability rate (%)",         "required": true  },
+        { "id": "circularity.disassembly_instructions",       "label": "Disassembly instructions reference", "required": false },
+        { "id": "circularity.spare_parts_availability",       "label": "Spare parts availability period (years)", "required": true  },
+        { "id": "circularity.end_of_life_instructions",       "label": "End-of-life handling instructions", "required": true  }
+      ]
+    },
+    {
+      "id": "compliance",
+      "label": "Compliance and Certifications",
+      "required": true,
+      "subfields": [
+        { "id": "compliance.ce_marking",                      "label": "CE marking",                     "required": true  },
+        { "id": "compliance.eu_declarations",                 "label": "EU declarations of conformity",  "required": true  },
+        { "id": "compliance.reach_compliance",                "label": "REACH compliance statement",     "required": true  },
+        { "id": "compliance.rohs_compliance",                 "label": "RoHS compliance statement",      "required": false },
+        { "id": "compliance.standards",                       "label": "Applicable harmonised standards","required": false }
+      ]
+    }
+  ]
+}

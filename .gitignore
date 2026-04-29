@@ -1,0 +1,29 @@
+# API keys — NEVER commit this
+src/config.yaml
+
+# Experiment outputs (tracked by directory via .gitkeep, not by content)
+src/outputs/raw/*.json
+src/outputs/scored/*.json
+src/outputs/aggregate_summary.csv
+src/outputs/latex_tables.tex
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.venv/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store

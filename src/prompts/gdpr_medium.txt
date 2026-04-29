@@ -1,0 +1,13 @@
+You are a compliance expert. Generate a complete Data Protection Impact Assessment (DPIA) for the following processing scenario.
+
+SCENARIO:
+A pan-European parcel logistics operator is deploying an AI-driven workforce management platform across 18 EU distribution and sorting centers. The system continuously processes GPS location tracks, package-handling throughput, biometric entry and exit scans, and task completion patterns for approximately 12,000 warehouse operatives and delivery drivers. The platform uses these data streams to automate shift scheduling, generate real-time performance rankings, and produce automated underperformance flags that feed directly into HR review and employment decision workflows.
+
+KEY REQUIREMENTS (plain-language summary):
+A DPIA must include four main components:
+1. A systematic description of what the processing involves — what data is collected, from whom, for what purposes, how it flows through the organization, and how long it is retained.
+2. An assessment of whether the processing is necessary and proportionate — whether the same goals could be achieved with less data or less intrusive means, what the lawful basis for processing is, and how data subject rights are preserved.
+3. An assessment of the risks the processing poses to individuals' rights and freedoms — what could go wrong, how likely each risk is, and how severe the harm would be, including for any vulnerable groups.
+4. The measures you will put in place to address those risks — technical security controls, organizational policies, and the residual risk that remains after mitigation.
+
+Generate the DPIA as a structured JSON document that explicitly addresses each of these four components. The output must be a valid JSON object only — no prose outside the JSON.

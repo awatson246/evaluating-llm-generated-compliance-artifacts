@@ -1,0 +1,38 @@
+You are a compliance expert. Generate a complete Data Protection Impact Assessment (DPIA) for the following processing scenario.
+
+SCENARIO:
+A pan-European parcel logistics operator is deploying an AI-driven workforce management platform across 18 EU distribution and sorting centers. The system continuously processes GPS location tracks, package-handling throughput, biometric entry and exit scans, and task completion patterns for approximately 12,000 warehouse operatives and delivery drivers. The platform uses these data streams to automate shift scheduling, generate real-time performance rankings, and produce automated underperformance flags that feed directly into HR review and employment decision workflows.
+
+STRUCTURED REQUIREMENTS:
+Your DPIA must address the following four areas. Each must appear as a distinct, labeled section in your JSON output.
+
+1. PROCESSING DESCRIPTION
+   - Categories of personal data collected and their sensitivity (including whether any fall under Article 9 special categories)
+   - Categories of data subjects and their relationship to the controller
+   - Stated purposes of processing and the lawful basis for each under Article 6 (and Article 9 if applicable)
+   - Data flows: how data is collected, stored, accessed, transferred, and deleted
+   - Retention periods for each data category
+   - Recipients or categories of recipients (internal and external)
+
+2. NECESSITY AND PROPORTIONALITY
+   - Justification that each data category is strictly necessary for the stated purposes
+   - Assessment of whether less privacy-intrusive alternatives could achieve the same outcomes
+   - Data minimization and purpose limitation measures in place
+   - Provisions for data subjects to exercise their rights (access, rectification, erasure, restriction, objection, portability)
+   - Storage limitation justification
+
+3. RISK ASSESSMENT
+   - Enumeration of specific risks to data subjects (e.g., unlawful automated employment decisions, surveillance chilling effects, discriminatory profiling, data breach, function creep)
+   - Likelihood rating for each risk (low / medium / high)
+   - Severity rating for each risk (low / medium / high)
+   - Overall risk level for the processing activity
+   - Any heightened risks for vulnerable subgroups
+
+4. RISK MITIGATION MEASURES
+   - Technical security measures (e.g., encryption at rest and in transit, pseudonymisation, access controls, audit logging)
+   - Organizational measures (e.g., employee notification procedures, DPO involvement, processor contracts, staff training)
+   - Mechanisms ensuring data subjects can contest automated decisions
+   - Residual risk level after controls are applied
+   - Whether prior consultation with the supervisory authority is required
+
+Generate the DPIA as a structured JSON document with four top-level keys corresponding to the four sections above. The output must be a valid JSON object only — no prose outside the JSON.

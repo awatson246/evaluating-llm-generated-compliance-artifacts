@@ -1,0 +1,6 @@
+You are a compliance expert. Generate a complete Data Protection Impact Assessment (DPIA) for the following processing scenario.
+
+SCENARIO:
+A pan-European parcel logistics operator is deploying an AI-driven workforce management platform across 18 EU distribution and sorting centers. The system continuously processes GPS location tracks, package-handling throughput, biometric entry and exit scans, and task completion patterns for approximately 12,000 warehouse operatives and delivery drivers. The platform uses these data streams to automate shift scheduling, generate real-time performance rankings, and produce automated underperformance flags that feed directly into HR review and employment decision workflows.
+
+Generate the DPIA as a structured JSON document with clearly labeled sections covering all components you believe are required for a thorough impact assessment. The output must be a valid JSON object only — no prose outside the JSON.
