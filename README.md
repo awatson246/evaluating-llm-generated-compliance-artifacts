@@ -49,13 +49,13 @@ src/
 ### 1. Install dependencies
 
 ```bash
-pip install -r research_pipeline/requirements.txt
+pip install -r src/requirements.txt
 ```
 
 ### 2. Configure API keys
 
 ```bash
-cp research_pipeline/config.yaml.example research_pipeline/config.yaml
+cp src/config.yaml.example src/config.yaml
 # Edit config.yaml — add your API keys. This file is gitignored.
 ```
 
@@ -68,7 +68,7 @@ The `dry_run` flag runs a single condition (one model, one task, one vagueness l
 #   dry_run:
 #     enabled: true
 
-cd research_pipeline
+cd src
 python run_experiment.py
 
 # Or override via CLI flag:
@@ -78,7 +78,7 @@ python run_experiment.py --dry-run
 ## Running the Full Experiment
 
 ```bash
-cd research_pipeline
+cd src
 python run_experiment.py
 ```
 
@@ -113,7 +113,7 @@ Once schemas are finalized:
 After scoring:
 
 ```bash
-cd research_pipeline
+cd src
 python analysis/aggregate_results.py   # → outputs/aggregate_summary.csv
 python analysis/export_tables.py       # → outputs/latex_tables.tex
 ```
