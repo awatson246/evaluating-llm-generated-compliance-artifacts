@@ -120,8 +120,27 @@ Each file contains:
 
 ## Scoring Pipeline
 
-1. `schema_scorer.py` takes a parsed artifact + schema → per-field `present/absent` + overall completeness score (0–1)
-2. `consistency_scorer.py` takes 3 runs of the same condition → field-level stability scores
+To score all tasks:
+```bash
+cd src
+python run_scoring.py
+```
+
+or
+
+To score just one task:
+```bash
+cd src
+python run_scoring.py --task gdpr   # gdpr only
+```
+
+or
+
+To specify a stability threshold:
+```bash
+cd src
+python run_scoring.py --stability-threshold 0.667
+```
 
 ## Analysis and Export
 
