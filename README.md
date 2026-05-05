@@ -148,11 +148,23 @@ After scoring:
 
 ```bash
 cd src
-python analysis/aggregate_results.py   # → outputs/aggregate_summary.csv
-python analysis/export_tables.py       # → outputs/latex_tables.tex
+python run_scoring.py
+python analysis/aggregate_results.py
+python analysis/export_tables.py
+python analysis/plot_results.py
 ```
-
-The LaTeX tables are formatted for an AAAI-style paper: rows = vagueness levels, columns = models, cells = mean completeness or consistency score.
+This returns: 
+1. outputs/aggregate_summary.csv — per-(model, task, level): mean_completeness, std_completeness, group_completeness, overall_consistency, n_runs
+2. outputs/field_stability.csv — per-(model, task, level, field): stability score + required flag
+3. outputs/latex_tables.tex — 3 tables per task, drop-in ready:
+  - Completeness (mean ± std, includes baseline row)
+  - Consistency (same layout)
+  - Required field inclusion rates
+4. outputs/figures/ — 4 figures per task (PDF + PNG):
+  - completeness_<task> — grouped bars by vagueness level
+  - consistency_<task> — same for consistency
+  - field_heatmap_<task> — heatmap of field inclusion, sorted with most-excluded fields at top
+  - completeness_vs_consistency_<task> — scatter with model shapes and vagueness colours
 
 ## Adding a New Model
 
