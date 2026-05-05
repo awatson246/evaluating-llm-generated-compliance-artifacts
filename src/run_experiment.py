@@ -6,6 +6,9 @@ Usage:
     python run_experiment.py               # follow config.yaml settings
     python run_experiment.py --dry-run     # override: single condition, no schema needed
     python run_experiment.py --config path/to/other_config.yaml
+    python run_experiment.py --task espr   # run only ESPR/AAS across all levels
+    python run_experiment.py --task gdpr   # run only GDPR/DPIA across all levels
+    python run_experiment.py --task espr --task gdpr  # explicit multi-task override
 """
 
 from __future__ import annotations
@@ -83,7 +86,7 @@ async def run_one(model, task: str, level: str, run_num: int, sem: asyncio.Semap
     }
 
 
-def build_conditions(config: dict, force_dry_run: bool) -> list[tuple[str, str, str, str, int]]:
+def build_conditions(config: dict, force_dry_run: bool, task_filter: list[str] | None = None) -> list[tuple[str, str, str, str, int]]:
     """Return list of (provider, model_id, task, vagueness_level, run_number)."""
     dry_cfg = config.get("dry_run", {})
     if force_dry_run or dry_cfg.get("enabled", False):
@@ -91,17 +94,24 @@ def build_conditions(config: dict, force_dry_run: bool) -> list[tuple[str, str, 
         provider, model_id = dry_cfg["model"].split("/", 1)
         return [(provider, model_id, dry_cfg["task"], dry_cfg["vagueness_level"], 1)]
 
+    # CLI --task flag > config filter_tasks > all tasks in config
+    tasks = task_filter or config.get("filter_tasks") or config["tasks"]
+    unknown = set(tasks) - set(config["tasks"])
+    if unknown:
+        raise ValueError(f"Unknown task(s): {unknown}. Valid tasks: {config['tasks']}")
+    log.info("Running tasks: %s", tasks)
+
     return [
         (entry["provider"], entry["model_id"], task, level, run)
         for entry in config["models"]
-        for task  in config["tasks"]
+        for task  in tasks
         for level in config["vagueness_levels"]
         for run   in range(1, config["num_runs"] + 1)
     ]
 
 
-async def run_experiment(config: dict, force_dry_run: bool = False) -> None:
-    conditions = build_conditions(config, force_dry_run)
+async def run_experiment(config: dict, force_dry_run: bool = False, task_filter: list[str] | None = None) -> None:
+    conditions = build_conditions(config, force_dry_run, task_filter)
     log.info("Conditions to run: %d", len(conditions))
 
     keys        = config["api_keys"]
@@ -143,11 +153,15 @@ def main() -> None:
     )
     parser.add_argument(
         "--config", default=str(ROOT / "config.yaml"),
-        help="Path to config.yaml (default: research_pipeline/config.yaml)"
+        help="Path to config.yaml (default: src/config.yaml)"
     )
-    args   = parser.parse_args()
-    config = load_config(Path(args.config))
-    asyncio.run(run_experiment(config, force_dry_run=args.dry_run))
+    parser.add_argument(
+        "--task", dest="tasks", action="append", metavar="TASK",
+        help="Run only this task (espr or gdpr). Repeat to include multiple. Overrides config."
+    )
+    args        = parser.parse_args()
+    config      = load_config(Path(args.config))
+    asyncio.run(run_experiment(config, force_dry_run=args.dry_run, task_filter=args.tasks))
 
 
 if __name__ == "__main__":

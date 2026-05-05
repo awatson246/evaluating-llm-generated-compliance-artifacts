@@ -7,10 +7,10 @@ The regulatory language used in the ESPR and GDPR is inherently vague; while hum
 | Dimension | Values |
 |---|---|
 | **Tasks** | ESPR/DPP (AAS submodel), GDPR/DPIA (Article 35(7)) |
-| **Vagueness levels** | Low (task only), Medium (task + plain-language summary), High (task + regulatory text) |
-| **Models** | GPT-4o, Claude 3.5 Sonnet, Llama 3, Mistral, + 1 TBD |
+| **Vagueness levels** | Baseline (direct quote from regulation), Low (task only), Medium (task + plain-language summary), High (task + regulatory text) |
+| **Models** | GPT-4o, Claude 3.5 Sonnet, Llama 3, Mistral, Zephyr-7b |
 | **Runs per condition** | 3 |
-| **Total conditions** | 2 tasks × 3 levels × 5 models × 3 runs = **90 runs** |
+| **Total conditions** | 2 tasks × 4 levels × 5 models × 3 runs = **120 runs** |
 
 Each run produces a structured JSON artifact that is scored for (1) field completeness against a schema and (2) cross-run consistency.
 
@@ -75,11 +75,29 @@ python run_experiment.py
 python run_experiment.py --dry-run
 ```
 
+## Running Just One Regulation
+You can use CLi flags  to run just ESPR tasks:
+```bash
+cd src
+python run_experiment.py --task espr
+```
+Or only GDPR tasks:
+```bash
+cd src
+python run_experiment.py --task gdpr
+```
+
 ## Running the Full Experiment
 
 ```bash
 cd src
 python run_experiment.py
+```
+or
+
+```bash
+cd src
+python run_experiment.py --task espr --task gdpr
 ```
 
 Raw outputs are saved to `outputs/raw/` as JSON files named:

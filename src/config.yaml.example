@@ -16,11 +16,16 @@ models:
   - provider: huggingface
     model_id: mistralai/Mistral-7B-Instruct-v0.3
   - provider: huggingface
-    model_id: HuggingFaceH4/zephyr-7b-beta  # TBD — swap for your 5th model
+    model_id: HuggingFaceH4/zephyr-7b-beta 
 
 tasks:
   - gdpr
-  - espr  # scaffold only — see co-author for ESPR implementation
+  - espr
+
+# Optional: restrict to a subset of tasks without editing the tasks list above.
+# Equivalent to passing --task on the CLI. Remove or leave empty to run all tasks.
+# filter_tasks:
+#   - espr
 
 vagueness_levels:
   - low
