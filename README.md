@@ -148,7 +148,6 @@ After scoring:
 
 ```bash
 cd src
-python run_scoring.py
 python analysis/aggregate_results.py
 python analysis/export_tables.py
 python analysis/plot_results.py

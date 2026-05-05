@@ -174,7 +174,7 @@ def plot_metric_bars(agg_df: pd.DataFrame, task: str,
 
     ax.set_xticks(x)
     ax.set_xticklabels([VAGUENESS_LABELS[lv] for lv in levels])
-    ax.set_xlabel("Vagueness level")
+    ax.set_xlabel("Context")
     ax.set_ylabel(ylabel)
     ax.set_ylim(0, 1.05)
     ax.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
