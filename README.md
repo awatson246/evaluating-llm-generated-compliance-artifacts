@@ -8,7 +8,7 @@ The regulatory language used in the ESPR and GDPR is inherently vague; while hum
 |---|---|
 | **Tasks** | ESPR/DPP (AAS submodel), GDPR/DPIA (Article 35(7)) |
 | **Vagueness levels** | Baseline (direct quote from regulation), Low (task only), Medium (task + plain-language summary), High (task + regulatory text) |
-| **Models** | GPT-4o, Claude 3.5 Sonnet, Llama 3, Mistral, Zephyr-7b |
+| **Models** | GPT-4o, Claude Sonnet 4.6, Llama 3.1, Mistral, Qwen-2.5 |
 | **Runs per condition** | 3 |
 | **Total conditions** | 2 tasks × 4 levels × 5 models × 3 runs = **120 runs** |
 
@@ -20,7 +20,7 @@ Each run produces a structured JSON artifact that is scored for (1) field comple
 src/
 ├── prompts/
 │   ├── gdpr_{low,medium,high}.txt     # GDPR/DPIA prompts (implemented)
-│   └── espr_{low,medium,high}.txt     # ESPR/DPP prompts (scaffold — see co-author)
+│   └── espr_{low,medium,high}.txt     # ESPR/DPP prompts (scaffold)
 ├── schemas/
 │   ├── dpia_schema.json               # Article 35(7) fields for GDPR scoring
 │   └── aas_dpp_schema.json            # AAS submodel fields for ESPR scoring (scaffold)
@@ -30,8 +30,8 @@ src/
 │   ├── anthropic_model.py
 │   └── huggingface_model.py
 ├── scoring/
-│   ├── schema_scorer.py               # Field completeness scorer (scaffold)
-│   └── consistency_scorer.py          # Cross-run variance scorer (scaffold)
+│   ├── schema_scorer.py               # Field completeness scorer
+│   └── consistency_scorer.py          # Cross-run variance scorer
 ├── outputs/
 │   ├── raw/                           # One JSON per run (gitignored contents)
 │   └── scored/                        # Scored results per condition (gitignored contents)
@@ -120,9 +120,6 @@ Each file contains:
 
 ## Scoring Pipeline
 
-> **Status**: Scoring modules are scaffolded. Finalize `dpia_schema.json` and `aas_dpp_schema.json` with your co-author before implementing `scoring/schema_scorer.py` and `scoring/consistency_scorer.py`.
-
-Once schemas are finalized:
 1. `schema_scorer.py` takes a parsed artifact + schema → per-field `present/absent` + overall completeness score (0–1)
 2. `consistency_scorer.py` takes 3 runs of the same condition → field-level stability scores
 

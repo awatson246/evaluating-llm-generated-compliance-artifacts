@@ -10,13 +10,14 @@ models:
   - provider: openai
     model_id: gpt-4o
   - provider: anthropic
-    model_id: claude-3-5-sonnet-20241022
+    model_id: claude-sonnet-4-6
   - provider: huggingface
-    model_id: meta-llama/Meta-Llama-3-8B-Instruct
+    # Requires accepting the Meta license at huggingface.co/meta-llama/Llama-3.1-8B-Instruct
+    model_id: meta-llama/Llama-3.1-8B-Instruct
   - provider: huggingface
-    model_id: mistralai/Mistral-7B-Instruct-v0.3
+    model_id: mistralai/Mistral-7B-Instruct-v0.2
   - provider: huggingface
-    model_id: HuggingFaceH4/zephyr-7b-beta 
+    model_id: Qwen/Qwen2.5-7B-Instruct
 
 tasks:
   - gdpr
@@ -37,6 +38,11 @@ num_runs: 3
 
 # Limit concurrent API calls to avoid rate limits.
 max_concurrent: 5
+
+# Retry settings for rate-limited requests (HTTP 429).
+retry:
+  max_retries: 3          # retries after the initial attempt
+  base_delay_seconds: 60  # doubles each retry: 60s → 120s → 240s
 
 # Enable dry_run to test your setup with a single condition.
 dry_run:

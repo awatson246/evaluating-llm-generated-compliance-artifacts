@@ -1,204 +1,925 @@
 {
-  "schema_id": "gdpr_dpia_v1",
-  "version": "1.0",
-  "description": "DPIA required fields per GDPR Article 35(7)",
-  "regulation": "GDPR (EU) 2016/679, Article 35(7)",
-  "fields": [
-    {
-      "id": "processing_description",
-      "label": "Systematic Description of Processing Operations",
-      "article_ref": "35(7)(a)",
-      "required": true,
-      "description": "A systematic description of the envisaged processing operations and the purposes of the processing, including where applicable the legitimate interest pursued by the controller.",
-      "subfields": [
-        {
-          "id": "processing_description.nature",
-          "label": "Nature of processing",
-          "required": true
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gdpr_dpia_v2",
+  "version": "2.0",
+  "description": "DPIA required fields per GDPR Article 35(7), supplemented by EDPB/WP29 guidelines on acceptable DPIAs (WP248 rev.01), the ICO Age Appropriate Design Code Annex D template, and the City of Amsterdam DPIA template. Fields marked required:true are mandated by Art. 35(7) or EDPB guidelines; required:false fields are best-practice inclusions from the templates.",
+  "regulation": "GDPR (EU) 2016/679, Article 35(7); EDPB Guidelines WP248 rev.01",
+  "definitions": {
+    "lawful_basis_entry": {
+      "type": "object",
+      "description": "A single applicable lawful basis with its legal grounding and justification.",
+      "properties": {
+        "basis": {
+          "type": "string",
+          "enum": [
+            "consent",
+            "contract",
+            "legal_obligation",
+            "vital_interests",
+            "public_task",
+            "legitimate_interest"
+          ],
+          "description": "Art. 6(1) lawful basis. For special category data, an Art. 9(2) basis must also be provided in special_category_basis."
         },
-        {
-          "id": "processing_description.scope",
-          "label": "Scope of processing",
-          "required": true
+        "article_reference": {
+          "type": "string",
+          "description": "Specific article and paragraph, e.g. 'Art. 6(1)(a)' or 'Art. 9(2)(b)'."
         },
-        {
-          "id": "processing_description.context",
-          "label": "Context of processing",
-          "required": true
-        },
-        {
-          "id": "processing_description.purposes",
-          "label": "Purposes of processing",
-          "required": true
-        },
-        {
-          "id": "processing_description.data_categories",
-          "label": "Categories of personal data processed",
-          "required": true
-        },
-        {
-          "id": "processing_description.data_subjects",
-          "label": "Categories of data subjects",
-          "required": true
-        },
-        {
-          "id": "processing_description.data_flows",
-          "label": "Data flows (collection, storage, transfer, deletion)",
-          "required": true
-        },
-        {
-          "id": "processing_description.recipients",
-          "label": "Recipients or categories of recipients",
-          "required": false
-        },
-        {
-          "id": "processing_description.retention_period",
-          "label": "Retention period",
-          "required": true
-        },
-        {
-          "id": "processing_description.legitimate_interest",
-          "label": "Legitimate interest pursued (if applicable)",
-          "required": false
+        "justification": {
+          "type": "string",
+          "description": "Why this basis applies to the processing activity described."
         }
+      },
+      "required": [
+        "basis",
+        "justification"
       ]
     },
-    {
-      "id": "necessity_proportionality",
-      "label": "Assessment of Necessity and Proportionality",
-      "article_ref": "35(7)(b)",
-      "required": true,
-      "description": "An assessment of the necessity and proportionality of the processing operations in relation to the purposes.",
-      "subfields": [
-        {
-          "id": "necessity_proportionality.necessity_justification",
-          "label": "Justification of necessity for the processing",
-          "required": true
+    "risk_entry": {
+      "type": "object",
+      "description": "A single identified risk to the rights and freedoms of data subjects.",
+      "properties": {
+        "risk_id": {
+          "type": "string"
         },
-        {
-          "id": "necessity_proportionality.proportionality_justification",
-          "label": "Justification of proportionality relative to purposes",
-          "required": true
+        "description": {
+          "type": "string",
+          "description": "Description of the risk source and the nature of potential impact on data subjects' rights and freedoms (not just harm)."
         },
-        {
-          "id": "necessity_proportionality.lawful_basis",
-          "label": "Lawful basis for processing (Article 6 / Article 9)",
-          "required": true
+        "source_of_risk": {
+          "type": "string"
         },
-        {
-          "id": "necessity_proportionality.data_minimization",
-          "label": "Data minimization measures",
-          "required": true
+        "affects_vulnerable_groups": {
+          "type": "boolean"
         },
-        {
-          "id": "necessity_proportionality.storage_limitation",
-          "label": "Storage limitation justification",
-          "required": true
+        "vulnerable_group_detail": {
+          "type": "string"
         },
-        {
-          "id": "necessity_proportionality.accuracy_measures",
-          "label": "Measures to ensure data accuracy and quality",
-          "required": false
+        "affects_children": {
+          "type": "boolean"
         },
-        {
-          "id": "necessity_proportionality.data_subject_rights",
-          "label": "Provisions for data subject rights (access, rectification, erasure, etc.)",
-          "required": true
+        "child_age_group": {
+          "type": "string"
         },
-        {
-          "id": "necessity_proportionality.alternatives_considered",
-          "label": "Less privacy-intrusive alternatives considered",
-          "required": false
+        "involves_cross_border_transfer": {
+          "type": "boolean"
+        },
+        "involves_automated_decision_making": {
+          "type": "boolean"
+        },
+        "likelihood": {
+          "type": "string",
+          "enum": [
+            "remote",
+            "possible",
+            "probable"
+          ],
+          "description": "Likelihood of the risk materialising, per WP248 three-point scale."
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "minimal",
+            "significant",
+            "severe"
+          ],
+          "description": "Severity of impact on data subjects if the risk materialises, per WP248 three-point scale."
+        },
+        "overall_risk_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "description": "Combined overall risk level derived from likelihood and severity."
+        },
+        "proposed_measures": {
+          "type": "string",
+          "description": "Technical and/or organisational measures proposed to address this risk."
+        },
+        "effect_on_risk": {
+          "type": "string",
+          "enum": [
+            "eliminated",
+            "reduced",
+            "accepted"
+          ]
+        },
+        "residual_risk_level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "description": "Risk level remaining after measures are applied. High residual risk requires prior consultation with the supervisory authority per Art. 36."
+        },
+        "measure_approved": {
+          "type": "boolean"
+        },
+        "action_holder": {
+          "type": "string"
+        },
+        "target_completion_date": {
+          "type": "string",
+          "format": "date"
         }
+      },
+      "required": [
+        "description",
+        "likelihood",
+        "severity",
+        "overall_risk_level",
+        "residual_risk_level"
       ]
     },
-    {
-      "id": "risk_assessment",
-      "label": "Assessment of Risks to Rights and Freedoms",
-      "article_ref": "35(7)(c)",
-      "required": true,
-      "description": "An assessment of the risks to the rights and freedoms of data subjects.",
-      "subfields": [
-        {
-          "id": "risk_assessment.identified_risks",
-          "label": "Identified risks to data subjects",
-          "required": true
+    "named_signatory": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         },
-        {
-          "id": "risk_assessment.likelihood",
-          "label": "Likelihood of each risk materializing",
-          "required": true
+        "position": {
+          "type": "string"
         },
-        {
-          "id": "risk_assessment.severity",
-          "label": "Severity of harm if each risk materializes",
-          "required": true
+        "date": {
+          "type": "string",
+          "format": "date"
         },
-        {
-          "id": "risk_assessment.overall_risk_level",
-          "label": "Overall risk level (e.g. low / medium / high)",
-          "required": true
-        },
-        {
-          "id": "risk_assessment.vulnerable_groups",
-          "label": "Specific impact on vulnerable groups",
-          "required": false
-        },
-        {
-          "id": "risk_assessment.cross_border_risks",
-          "label": "Risks associated with cross-border transfers",
-          "required": false
-        },
-        {
-          "id": "risk_assessment.automated_decision_risks",
-          "label": "Risks from automated decision-making or profiling",
-          "required": false
+        "notes": {
+          "type": "string"
         }
-      ]
-    },
-    {
-      "id": "risk_mitigation",
-      "label": "Measures to Address Risks",
-      "article_ref": "35(7)(d)",
-      "required": true,
-      "description": "The measures envisaged to address the risks, including safeguards, security measures, and mechanisms to ensure protection of personal data and demonstrate compliance.",
-      "subfields": [
-        {
-          "id": "risk_mitigation.technical_measures",
-          "label": "Technical security measures (encryption, pseudonymisation, access controls, etc.)",
-          "required": true
-        },
-        {
-          "id": "risk_mitigation.organizational_measures",
-          "label": "Organizational measures (policies, training, DPA agreements, etc.)",
-          "required": true
-        },
-        {
-          "id": "risk_mitigation.compliance_mechanisms",
-          "label": "Mechanisms to demonstrate ongoing GDPR compliance",
-          "required": true
-        },
-        {
-          "id": "risk_mitigation.residual_risk",
-          "label": "Residual risk assessment after mitigation measures",
-          "required": true
-        },
-        {
-          "id": "risk_mitigation.dpo_consultation",
-          "label": "DPO advice and consultation outcome",
-          "required": false
-        },
-        {
-          "id": "risk_mitigation.supervisory_authority_consultation",
-          "label": "Prior consultation with supervisory authority (Article 36, if required)",
-          "required": false
-        },
-        {
-          "id": "risk_mitigation.review_schedule",
-          "label": "DPIA review and reassessment schedule",
-          "required": false
-        }
+      },
+      "required": [
+        "name",
+        "date"
       ]
     }
+  },
+  "properties": {
+    "dpia_record": {
+      "description": "Administrative and versioning metadata for this DPIA document. Required by EDPB guidelines to treat the DPIA as a living document.",
+      "type": "object",
+      "properties": {
+        "controller_name": {
+          "type": "string"
+        },
+        "dpia_title": {
+          "type": "string"
+        },
+        "dpo_or_contact_name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "submission_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "is_new_process": {
+          "type": "boolean"
+        },
+        "prior_dpia_conducted": {
+          "type": "boolean"
+        },
+        "changes_since_last_dpia": {
+          "type": "string",
+          "description": "Material changes since the previous DPIA that triggered this assessment."
+        },
+        "dpia_scope": {
+          "type": "string",
+          "enum": [
+            "single_activity",
+            "series_of_comparable_activities"
+          ]
+        },
+        "review_schedule": {
+          "type": "string",
+          "description": "Planned frequency and trigger conditions for DPIA review, per EDPB guideline requirement that DPIAs be kept under review."
+        }
+      }
+    },
+    "processing_description": {
+      "description": "Art. 35(7)(a): A systematic description of the envisaged processing operations, the purposes of processing, and where applicable the legitimate interest pursued by the controller.",
+      "article_ref": "35(7)(a)",
+      "type": "object",
+      "properties": {
+        "nature": {
+          "label": "Nature of processing",
+          "type": "object",
+          "properties": {
+            "overview": {
+              "type": "string",
+              "description": "How personal data is collected, used, stored, and deleted. Include any new technologies involved (e.g. IoT, AI/ML, behavioural advertising, biometrics)."
+            },
+            "high_risk_processing_types": {
+              "type": "array",
+              "description": "Flags for processing types listed in Art. 35(3) or WP248 as likely high-risk.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "systematic_large_scale_monitoring",
+                  "large_scale_special_category_data",
+                  "automated_decision_making_with_legal_effect",
+                  "profiling",
+                  "geolocation_tracking",
+                  "data_matching_or_linking",
+                  "novel_technology",
+                  "vulnerable_group_processing",
+                  "children_processing",
+                  "cross_border_transfer",
+                  "nudge_techniques",
+                  "connected_devices",
+                  "other"
+                ]
+              }
+            },
+            "service_designed_for_children": {
+              "type": "boolean"
+            },
+            "children_likely_to_access": {
+              "type": "boolean"
+            }
+          }
+        },
+        "scope": {
+          "label": "Scope of processing",
+          "type": "object",
+          "properties": {
+            "data_categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Categories of personal data processed."
+            },
+            "special_categories_present": {
+              "type": "boolean",
+              "description": "Whether Art. 9 special category data (health, biometric, racial origin, etc.) is involved."
+            },
+            "special_categories_detail": {
+              "type": "string"
+            },
+            "criminal_data_present": {
+              "type": "boolean"
+            },
+            "volume_and_frequency": {
+              "type": "string"
+            },
+            "geographic_area": {
+              "type": "string"
+            },
+            "retention_period": {
+              "type": "string",
+              "description": "Defined retention periods per data category, or justification if no fixed period is set."
+            }
+          }
+        },
+        "context": {
+          "label": "Context of processing",
+          "type": "object",
+          "properties": {
+            "prior_concerns_or_incidents": {
+              "type": "string"
+            },
+            "novel_technology_description": {
+              "type": "string"
+            },
+            "public_concern_factors": {
+              "type": "string"
+            },
+            "relevant_standards_or_codes_of_practice": {
+              "type": "string"
+            },
+            "child_development_research_considered": {
+              "type": "string"
+            }
+          }
+        },
+        "purposes": {
+          "label": "Purposes of processing",
+          "type": "object",
+          "properties": {
+            "stated_purposes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Specific, explicit purposes for which data is processed."
+            },
+            "legitimate_interest_pursued": {
+              "type": "string",
+              "description": "Where legitimate interest is the lawful basis, the specific interest pursued by the controller. Required by Art. 35(7)(a)."
+            },
+            "intended_effect_on_individuals": {
+              "type": "string"
+            },
+            "benefits_general": {
+              "type": "string"
+            },
+            "benefits_for_children": {
+              "type": "string",
+              "description": "Complete where the service is likely to be accessed by children."
+            }
+          }
+        },
+        "data_subjects": {
+          "label": "Categories of data subjects",
+          "type": "object",
+          "properties": {
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "approximate_number_of_individuals": {
+              "type": "integer"
+            },
+            "vulnerable_groups_present": {
+              "type": "boolean"
+            },
+            "vulnerable_groups_description": {
+              "type": "string"
+            },
+            "likely_child_age_range": {
+              "type": "string"
+            }
+          }
+        },
+        "data_flows": {
+          "label": "Data flows: collection, storage, transfer, deletion",
+          "type": "object",
+          "properties": {
+            "collection_method": {
+              "type": "string"
+            },
+            "data_sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "storage_medium": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deletion_mechanism": {
+              "type": "string"
+            }
+          }
+        },
+        "actors": {
+          "label": "Controllers, processors, and recipients",
+          "description": "All parties that come into contact with personal data. Required to establish accountability chains under Art. 26, 28, and 29.",
+          "type": "object",
+          "properties": {
+            "all_parties_identified": {
+              "type": "boolean"
+            },
+            "data_controllers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "internal",
+                      "external"
+                    ]
+                  },
+                  "joint_controller": {
+                    "type": "boolean"
+                  },
+                  "contract_in_place": {
+                    "type": "boolean"
+                  },
+                  "arrangement_communicated_to_subjects": {
+                    "type": "boolean",
+                    "description": "Required for joint controllers under Art. 26(2)."
+                  }
+                }
+              }
+            },
+            "data_processors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "processing_performed": {
+                    "type": "string"
+                  },
+                  "data_processing_agreement_in_place": {
+                    "type": "boolean",
+                    "description": "Required by Art. 28(3)."
+                  },
+                  "compliance_verification_measures": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "recipients": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "purpose_of_disclosure": {
+                    "type": "string"
+                  },
+                  "contractual_basis": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "international_transfers": {
+              "type": "object",
+              "description": "Personal data transfers to third countries outside the EEA. Chapter V of the GDPR applies.",
+              "properties": {
+                "transfers_occur": {
+                  "type": "boolean"
+                },
+                "destination_countries": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "transfer_mechanism": {
+                  "type": "string",
+                  "description": "e.g. adequacy decision (Art. 45), standard contractual clauses (Art. 46(2)(c)), binding corporate rules (Art. 47), derogations (Art. 49)."
+                },
+                "safeguards_implemented": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "necessity_proportionality": {
+      "description": "Art. 35(7)(b): Assessment of the necessity and proportionality of processing operations in relation to their purposes.",
+      "article_ref": "35(7)(b)",
+      "type": "object",
+      "properties": {
+        "lawful_basis": {
+          "label": "Lawful basis for processing (Art. 6 / Art. 9)",
+          "type": "object",
+          "properties": {
+            "bases": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/lawful_basis_entry"
+              },
+              "description": "All applicable Art. 6 lawful bases. Each must be individually justified."
+            },
+            "special_category_basis": {
+              "type": "object",
+              "description": "Required where Art. 9 special category data is processed.",
+              "properties": {
+                "article_9_condition": {
+                  "type": "string",
+                  "description": "Applicable Art. 9(2) condition, e.g. 'Art. 9(2)(a) \u2014 explicit consent'."
+                },
+                "justification": {
+                  "type": "string"
+                }
+              }
+            },
+            "legitimate_interest_balancing_test": {
+              "type": "object",
+              "description": "Required where legitimate interest is relied upon.",
+              "properties": {
+                "interest_described": {
+                  "type": "string"
+                },
+                "necessity_assessment": {
+                  "type": "string"
+                },
+                "balancing_test_outcome": {
+                  "type": "string"
+                }
+              }
+            },
+            "consent_validity": {
+              "type": "object",
+              "description": "Required where consent is the lawful basis. Must meet Art. 7 conditions.",
+              "properties": {
+                "freely_given": {
+                  "type": "boolean"
+                },
+                "specific": {
+                  "type": "boolean"
+                },
+                "informed": {
+                  "type": "boolean"
+                },
+                "unambiguous": {
+                  "type": "boolean"
+                },
+                "given_via_affirmative_act": {
+                  "type": "boolean"
+                },
+                "consent_recorded": {
+                  "type": "boolean"
+                },
+                "withdrawal_mechanism": {
+                  "type": "string",
+                  "description": "How and where the data subject can withdraw consent without detriment."
+                },
+                "children_under_16_targeted": {
+                  "type": "boolean"
+                },
+                "parental_consent_mechanism": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "necessity_justification": {
+          "label": "Justification of necessity",
+          "type": "string",
+          "description": "Why the processing is necessary to achieve the stated purposes \u2014 i.e. whether the purposes could not reasonably be achieved by less privacy-intrusive means."
+        },
+        "proportionality_justification": {
+          "label": "Justification of proportionality",
+          "type": "string",
+          "description": "Whether the privacy impact on data subjects is in reasonable proportion to the purpose pursued."
+        },
+        "purpose_limitation": {
+          "type": "object",
+          "properties": {
+            "secondary_purpose_exists": {
+              "type": "boolean"
+            },
+            "secondary_purpose_compatible": {
+              "type": "boolean",
+              "description": "Compatibility test per Art. 5(1)(b) and WP203."
+            },
+            "function_creep_prevention_measures": {
+              "type": "string"
+            }
+          }
+        },
+        "data_minimisation": {
+          "label": "Data minimisation measures",
+          "type": "object",
+          "properties": {
+            "all_fields_necessary": {
+              "type": "boolean"
+            },
+            "privacy_by_default_measures": {
+              "type": "string",
+              "description": "Technical defaults ensuring only data necessary for the specific purpose are collected, per Art. 25(2)."
+            },
+            "pseudonymisation_considered": {
+              "type": "boolean"
+            },
+            "anonymisation_considered": {
+              "type": "boolean"
+            }
+          }
+        },
+        "storage_limitation": {
+          "label": "Storage limitation justification",
+          "type": "object",
+          "properties": {
+            "data_deleted_when_purpose_fulfilled": {
+              "type": "boolean"
+            },
+            "deletion_or_anonymisation_mechanism": {
+              "type": "string"
+            },
+            "measures_where_no_fixed_period": {
+              "type": "string"
+            }
+          }
+        },
+        "data_quality_and_accuracy": {
+          "label": "Measures to ensure data accuracy and quality",
+          "type": "object",
+          "properties": {
+            "accuracy_measures": {
+              "type": "string"
+            },
+            "data_quality_guaranteed": {
+              "type": "boolean"
+            }
+          }
+        },
+        "data_subject_rights": {
+          "label": "Provisions for data subject rights",
+          "type": "object",
+          "description": "Effective mechanisms for exercising rights under Arts. 15\u201322.",
+          "properties": {
+            "right_to_access": {
+              "type": "boolean"
+            },
+            "right_to_rectification": {
+              "type": "boolean"
+            },
+            "right_to_erasure": {
+              "type": "boolean"
+            },
+            "right_to_data_portability": {
+              "type": "boolean"
+            },
+            "right_to_object": {
+              "type": "boolean"
+            },
+            "right_to_restrict_processing": {
+              "type": "boolean"
+            },
+            "rights_support_measures": {
+              "type": "string"
+            },
+            "automated_decision_making_safeguards": {
+              "type": "string",
+              "description": "Where Art. 22 applies: the specific safeguards enabling human review, the right to contest, and the right to explanation."
+            }
+          }
+        },
+        "transparency": {
+          "type": "object",
+          "properties": {
+            "privacy_notice_provided_at_collection": {
+              "type": "boolean"
+            },
+            "privacy_notice_clear_and_accessible": {
+              "type": "boolean"
+            },
+            "info_provided_for_indirect_collection": {
+              "type": "string",
+              "description": "Information provided under Art. 14 where data is not collected directly from the data subject."
+            },
+            "age_appropriate_transparency_measures": {
+              "type": "string"
+            }
+          }
+        },
+        "alternatives_considered": {
+          "label": "Less privacy-intrusive alternatives considered",
+          "type": "object",
+          "properties": {
+            "alternatives_assessed": {
+              "type": "boolean"
+            },
+            "alternatives_description": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "risk_assessment": {
+      "description": "Art. 35(7)(c): Assessment of the risks to the rights and freedoms of data subjects, following the WP248 methodology of likelihood \u00d7 severity.",
+      "article_ref": "35(7)(c)",
+      "type": "object",
+      "properties": {
+        "identified_risks": {
+          "label": "Identified risks to data subjects' rights and freedoms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/risk_entry"
+          },
+          "description": "Each risk must address impact on rights and freedoms (not only physical or financial harm). Include risks arising from: unauthorised access, unwanted modification, and disappearance of data (per WP248)."
+        },
+        "overall_residual_risk_is_high": {
+          "type": "boolean",
+          "description": "Whether any unmitigated residual risk remains high. If true, prior consultation with the supervisory authority is required under Art. 36 before processing begins."
+        },
+        "overall_residual_risk_description": {
+          "type": "string"
+        }
+      }
+    },
+    "risk_mitigation": {
+      "description": "Art. 35(7)(d): Measures envisaged to address risks, including safeguards, security measures, and mechanisms to ensure the protection of personal data and demonstrate compliance with the GDPR.",
+      "article_ref": "35(7)(d)",
+      "type": "object",
+      "properties": {
+        "technical_measures": {
+          "label": "Technical security measures",
+          "type": "object",
+          "description": "Measures implementing the principle of privacy by design (Art. 25(1)).",
+          "properties": {
+            "encryption_applied": {
+              "type": "boolean"
+            },
+            "pseudonymisation_applied": {
+              "type": "boolean"
+            },
+            "access_controls_in_place": {
+              "type": "boolean"
+            },
+            "additional_technical_measures": {
+              "type": "string"
+            }
+          }
+        },
+        "organisational_measures": {
+          "label": "Organisational measures",
+          "type": "object",
+          "properties": {
+            "data_processing_agreements_in_place": {
+              "type": "boolean"
+            },
+            "staff_training": {
+              "type": "string"
+            },
+            "internal_policies": {
+              "type": "string"
+            },
+            "approved_code_of_conduct": {
+              "type": "string",
+              "description": "Name of any approved code of conduct or certification scheme adhered to under Arts. 40\u201342."
+            }
+          }
+        },
+        "ai_and_algorithmic_measures": {
+          "type": "object",
+          "description": "Required where AI, ML, or profiling systems are used.",
+          "properties": {
+            "bias_assessment_conducted": {
+              "type": "boolean"
+            },
+            "explainability_measures": {
+              "type": "string"
+            },
+            "human_oversight_mechanisms": {
+              "type": "string"
+            }
+          }
+        },
+        "age_appropriate_design_measures": {
+          "description": "Complete where the service is likely to be accessed by children, per ICO Children's Code.",
+          "type": "object",
+          "properties": {
+            "best_interests_of_child": {
+              "type": "string"
+            },
+            "age_appropriate_application": {
+              "type": "string"
+            },
+            "detrimental_use_of_data": {
+              "type": "string"
+            },
+            "default_settings_child_protective": {
+              "type": "string"
+            },
+            "geolocation_controls": {
+              "type": "string"
+            },
+            "parental_controls": {
+              "type": "string"
+            },
+            "profiling_of_children": {
+              "type": "string"
+            },
+            "nudge_techniques": {
+              "type": "string"
+            }
+          }
+        },
+        "compliance_mechanisms": {
+          "label": "Mechanisms to demonstrate ongoing GDPR compliance",
+          "type": "string"
+        },
+        "consultation": {
+          "type": "object",
+          "description": "Consultation with the DPO (Art. 35(2), mandatory where a DPO exists), data subjects (Art. 35(9)), and the supervisory authority (Art. 36).",
+          "properties": {
+            "dpo_consultation": {
+              "type": "object",
+              "description": "Mandatory where a DPO has been designated under Art. 37. Failure to consult the DPO where one exists is a compliance failure.",
+              "properties": {
+                "dpo_consulted": {
+                  "type": "boolean"
+                },
+                "dpo_advice_summary": {
+                  "type": "string"
+                },
+                "dpo_advice_accepted": {
+                  "type": "boolean"
+                },
+                "dpo_override_justification": {
+                  "type": "string",
+                  "description": "Required if DPO advice is not followed."
+                }
+              }
+            },
+            "data_subject_consultation": {
+              "type": "object",
+              "description": "Art. 35(9): Controllers shall seek the views of data subjects or their representatives where appropriate.",
+              "properties": {
+                "data_subjects_consulted": {
+                  "type": "boolean"
+                },
+                "consultation_method_and_timing": {
+                  "type": "string"
+                },
+                "children_consulted": {
+                  "type": "boolean"
+                },
+                "parents_or_representatives_consulted": {
+                  "type": "boolean"
+                },
+                "justification_if_not_consulted": {
+                  "type": "string"
+                },
+                "views_followed_up": {
+                  "type": "boolean"
+                },
+                "departure_from_views_justification": {
+                  "type": "string"
+                }
+              }
+            },
+            "supervisory_authority_consultation": {
+              "type": "object",
+              "description": "Art. 36: Prior consultation with the supervisory authority is required where residual risk remains high after mitigation.",
+              "properties": {
+                "consultation_required": {
+                  "type": "boolean"
+                },
+                "consultation_triggered_by": {
+                  "type": "string"
+                },
+                "authority_contacted": {
+                  "type": "string"
+                },
+                "authority_advice_received": {
+                  "type": "string"
+                },
+                "authority_advice_implemented": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "review_and_sign_off": {
+          "type": "object",
+          "description": "EDPB guidelines require the DPIA to be a living document: approved before processing begins, kept under review, and updated when the processing changes.",
+          "properties": {
+            "measures_approved_by": {
+              "$ref": "#/definitions/named_signatory"
+            },
+            "residual_risks_approved_by": {
+              "$ref": "#/definitions/named_signatory"
+            },
+            "dpo_sign_off": {
+              "$ref": "#/definitions/named_signatory"
+            },
+            "review_schedule": {
+              "type": "string",
+              "description": "Planned frequency and trigger conditions for DPIA review."
+            },
+            "project_plan_actions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string"
+                  },
+                  "responsible_party": {
+                    "type": "string"
+                  },
+                  "due_date": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "dpia_record",
+    "processing_description",
+    "necessity_proportionality",
+    "risk_assessment",
+    "risk_mitigation"
   ]
 }

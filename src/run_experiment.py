@@ -53,12 +53,21 @@ def load_prompt(task: str, vagueness_level: str) -> str:
 
 # ── Output ────────────────────────────────────────────────────────────────────
 
+def _safe_model(model_id: str) -> str:
+    return model_id.replace("/", "_")
+
+
+def already_done(model_id: str, task: str, level: str, run_num: int) -> bool:
+    """Return True if a raw output file already exists for this condition."""
+    pattern = f"{_safe_model(model_id)}__{task}__{level}__run{run_num}__*.json"
+    return any(OUTPUTS_RAW.glob(pattern))
+
+
 def save_raw(record: dict) -> None:
     OUTPUTS_RAW.mkdir(parents=True, exist_ok=True)
-    safe_model = record["model_id"].replace("/", "_")
-    ts         = record["timestamp"].replace(":", "-").replace("+", "")
-    filename   = f"{safe_model}__{record['task']}__{record['vagueness_level']}__run{record['run_number']}__{ts}.json"
-    out        = OUTPUTS_RAW / filename
+    ts       = record["timestamp"].replace(":", "-").replace("+", "")
+    filename = f"{_safe_model(record['model_id'])}__{record['task']}__{record['vagueness_level']}__run{record['run_number']}__{ts}.json"
+    out      = OUTPUTS_RAW / filename
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(record, fh, indent=2, ensure_ascii=False)
     log.info("Saved  %s", out.name)
@@ -66,12 +75,40 @@ def save_raw(record: dict) -> None:
 
 # ── Experiment ────────────────────────────────────────────────────────────────
 
-async def run_one(model, task: str, level: str, run_num: int, sem: asyncio.Semaphore) -> dict:
+_RATE_LIMIT_SIGNALS = ("429", "rate_limit", "rate limit", "ratelimit", "too many requests")
+
+def _is_rate_limit(exc: Exception) -> bool:
+    msg = str(exc).lower()
+    return any(sig in msg for sig in _RATE_LIMIT_SIGNALS)
+
+
+async def run_one(
+    model,
+    task: str,
+    level: str,
+    run_num: int,
+    sem: asyncio.Semaphore,
+    max_retries: int = 3,
+    base_delay: float = 60.0,
+) -> dict:
     prompt = load_prompt(task, level)
-    async with sem:
-        log.info("START  %-40s  task=%-5s  level=%-6s  run=%d",
-                 model.model_id, task, level, run_num)
-        resp = await model.generate(prompt)
+    delay  = base_delay
+    for attempt in range(max_retries + 1):
+        async with sem:
+            log.info("START  %-40s  task=%-5s  level=%-6s  run=%d  (attempt %d)",
+                     model.model_id, task, level, run_num, attempt + 1)
+            try:
+                resp = await model.generate(prompt)
+            except Exception as exc:
+                if attempt >= max_retries or not _is_rate_limit(exc):
+                    raise
+                log.warning("Rate-limited (%s/%s) — sleeping %.0fs before retry",
+                            attempt + 1, max_retries, delay)
+            else:
+                break
+        # semaphore is released before sleeping so other calls can proceed
+        await asyncio.sleep(delay)
+        delay *= 2
 
     return {
         "model_id":        resp.model_id,
@@ -82,7 +119,7 @@ async def run_one(model, task: str, level: str, run_num: int, sem: asyncio.Semap
         "raw_response":    resp.raw_text,
         "usage":           resp.usage,
         "latency_seconds": round(resp.latency_seconds, 3),
-        "parsed_fields":   {},   # populated by scoring phase once schemas are finalised
+        "parsed_fields":   {},
     }
 
 
@@ -114,16 +151,29 @@ async def run_experiment(config: dict, force_dry_run: bool = False, task_filter:
     conditions = build_conditions(config, force_dry_run, task_filter)
     log.info("Conditions to run: %d", len(conditions))
 
+    retry_cfg   = config.get("retry", {})
+    max_retries = retry_cfg.get("max_retries", 3)
+    base_delay  = retry_cfg.get("base_delay_seconds", 60.0)
+
     keys        = config["api_keys"]
     sem         = asyncio.Semaphore(config.get("max_concurrent", 5))
     model_cache: dict[tuple, object] = {}
     coros       = []
+    skipped     = 0
 
     for provider, model_id, task, level, run in conditions:
+        if already_done(model_id, task, level, run):
+            log.info("SKIP   %-40s  task=%-5s  level=%-6s  run=%d  (already in outputs/raw)",
+                     model_id, task, level, run)
+            skipped += 1
+            continue
         key = (provider, model_id)
         if key not in model_cache:
             model_cache[key] = build_model(provider, model_id, api_key=keys[provider])
-        coros.append(run_one(model_cache[key], task, level, run, sem))
+        coros.append(run_one(model_cache[key], task, level, run, sem, max_retries, base_delay))
+
+    if skipped:
+        log.info("Skipped %d already-completed condition(s)", skipped)
 
     results = await asyncio.gather(*coros, return_exceptions=True)
 
