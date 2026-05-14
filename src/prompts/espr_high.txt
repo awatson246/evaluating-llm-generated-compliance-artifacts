@@ -1,7 +1,7 @@
 CONTEXT:
-
+You are a compliance expert. Generate a Digital Battery Passport (DBP) for the following product.
 Generate the DPP as a structured JSON document. Your output must map explicitly to the required AAS submodel fields referenced in the regulatory text above. The output must be a valid JSON object only — no prose outside the JSON.
-You are an expert in Asset Administration Shells (AAS), Digital Product Passports (DPP), and battery technical documentation.
+You are also an expert in Asset Administration Shells (AAS), Digital Product Passports (DPP), and battery technical documentation.
 
 Your task is to generate a valid AAS JSON representation for the Digital Battery Passport Technical Data submodel.
 
