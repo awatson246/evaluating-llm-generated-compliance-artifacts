@@ -2,7 +2,7 @@
 src/config.yaml
 
 # Experiment outputs (tracked by directory via .gitkeep, not by content)
-src/outputs/raw/*.json
+#src/outputs/raw/*.json
 src/outputs/scored/*.json
 src/outputs/aggregate_summary.csv
 src/outputs/latex_tables.tex
