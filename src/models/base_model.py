@@ -17,7 +17,7 @@ class BaseModel(ABC):
     def __init__(self, model_id: str, api_key: str, **kwargs):
         self.model_id = model_id
         self.api_key = api_key
-        self.max_tokens: int = kwargs.get("max_tokens", 4096)
+        self.max_tokens: int = kwargs.get("max_tokens", 6000)
         self.temperature: float = kwargs.get("temperature", 0.7)
 
     @abstractmethod
