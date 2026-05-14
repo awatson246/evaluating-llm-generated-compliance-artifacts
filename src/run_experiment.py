@@ -42,13 +42,53 @@ OUTPUTS_RAW = ROOT / "outputs" / "raw"
 def load_config(path: Path) -> dict:
     with open(path, encoding="utf-8") as fh:
         return yaml.safe_load(fh)
-
+    
 
 def load_prompt(task: str, vagueness_level: str) -> str:
-    path = PROMPTS_DIR / f"{task}_{vagueness_level}.txt"
-    if not path.exists():
-        raise FileNotFoundError(f"Prompt file not found: {path}")
-    return path.read_text(encoding="utf-8")
+    prompt_path = PROMPTS_DIR / f"{task}_{vagueness_level}.txt"
+
+    if not prompt_path.exists():
+        raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+
+    prompt_text = prompt_path.read_text(encoding="utf-8")
+
+    product_data = (
+        PROMPTS_DIR / "product_data.md"
+    ).read_text(encoding="utf-8")
+
+    regulatory_text = (
+        PROMPTS_DIR / "regulatory_text.md"
+    ).read_text(encoding="utf-8")
+
+    regulatory_annotations = (
+        PROMPTS_DIR / "regulatory_text_annotations.md"
+    ).read_text(encoding="utf-8")
+
+    idta_template = (
+        PROMPTS_DIR / "IDTA 02035-4_DBP-Part-4_TechnicalData.json"
+    ).read_text(encoding="utf-8")
+
+    prompt_text = prompt_text.replace(
+        "{{PRODUCT_DATA}}",
+        product_data
+    )
+
+    prompt_text = prompt_text.replace(
+        "{{REGULATORY_TEXT}}",
+        regulatory_text
+    )
+
+    prompt_text = prompt_text.replace(
+        "{{REGULATORY_ANNOTATIONS}}",
+        regulatory_annotations
+    )
+
+    prompt_text = prompt_text.replace(
+        "{{IDTA_TEMPLATE}}",
+        idta_template
+    )
+
+    return prompt_text
 
 
 # ── Output ────────────────────────────────────────────────────────────────────

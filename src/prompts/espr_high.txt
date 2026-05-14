@@ -1,11 +1,46 @@
-[SCAFFOLD — Replace with finalized product scenario, regulatory text excerpts, and instructions.]
-
-You are a compliance expert. Generate a Digital Product Passport (DPP) for the following product.
-
-PRODUCT:
-[Product details]
-
-REGULATORY TEXT:
-[ESPR regulatory text excerpts and/or AAS submodel specification]
+CONTEXT:
 
 Generate the DPP as a structured JSON document. Your output must map explicitly to the required AAS submodel fields referenced in the regulatory text above. The output must be a valid JSON object only — no prose outside the JSON.
+You are an expert in Asset Administration Shells (AAS), Digital Product Passports (DPP), and battery technical documentation.
+
+Your task is to generate a valid AAS JSON representation for the Digital Battery Passport Technical Data submodel.
+
+Generate the DBP as a structured JSON document. The output must be a valid JSON object only — no prose outside the JSON.
+
+The Digital Battery Passport is part of emerging industrial data interoperability standards for battery lifecycle transparency, sustainability, and traceability.
+
+The Technical Data submodel contains structured battery properties including:
+- manufacturer information
+- voltage characteristics
+- capacity and energy values
+- efficiency metrics
+- resistance metrics
+- temperature boundaries
+- lifetime indicators
+- power capability information
+
+Only extract information that is explicitly supported by the provided technical documentation.
+
+Do not hallucinate missing values.
+
+Preserve the JSON structure and field names from the provided template.
+
+Units must remain metric.
+
+If information is not available in the source document, leave the corresponding value empty.
+
+You are provided with:
+1. A regulatory context document
+2. A battery technical specification document
+3. An AAS technical data submodel template
+
+Generate the final AAS JSON.
+
+PRODUCT:
+{{PRODUCT_DATA}}
+
+REGULATORY TEXT AND ANNOTATIONS:
+{{REGULATORY_ANNOTATIONS}}
+
+SUBMODEL TEMPLATE:
+{{IDTA_TEMPLATE}}

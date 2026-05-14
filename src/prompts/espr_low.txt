@@ -1,8 +1,6 @@
-[SCAFFOLD — Replace with finalized product scenario and instructions.]
-
-You are a compliance expert. Generate a Digital Product Passport (DPP) for the following product.
+You are a compliance expert. Generate a Digital Battery Passport (DBP) for the following product.
 
 PRODUCT:
-[Product details]
+{{PRODUCT_DATA}}
 
-Generate the DPP as a structured JSON document according to the Asset Administration Shell (AAS) submodel format. Include all fields you believe are required for a complete and compliant Digital Product Passport. The output must be a valid JSON object only — no prose outside the JSON.
+Generate the DBP as a structured JSON document according to the Asset Administration Shell (AAS) Technical Data Submodel format for batteries. Include all fields you believe are required for a complete and compliant Digital Battery Passport. The output must be a valid JSON object only — no prose outside the JSON.

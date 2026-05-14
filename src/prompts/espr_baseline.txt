@@ -1,11 +1,12 @@
-[SCAFFOLD — Replace with finalized product scenario, regulatory text excerpts, and instructions. This is the baseline condition: verbatim regulatory/specification text, equivalent in role to gdpr_baseline.txt.]
-
-You are a compliance expert. Generate a Digital Product Passport (DPP) for the following product.
+You are a compliance expert. Generate a Digital Batter Passport (DBP) for the following product.
 
 PRODUCT:
-[Product details]
+{{PRODUCT_DATA}}
 
 REGULATORY TEXT:
-[Verbatim ESPR regulatory text and/or AAS submodel.]
+{{REGULATORY_TEXT}}
 
-Generate the DPP as a structured JSON document. Your output must map explicitly to the AAS submodel fields referenced in the regulatory text above. The output must be a valid JSON object only — no prose outside the JSON.
+
+Using the provided battery documentation and regulation information, build a Digital Battery Passport using the AAS Technical Data Submodel for batteries.
+
+Generate the DBP as a structured JSON document. The output must be a valid JSON object only — no prose outside the JSON.

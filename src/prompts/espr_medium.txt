@@ -1,11 +1,22 @@
-[SCAFFOLD — Replace with finalized product scenario, plain-language requirements, and instructions.]
+You are a compliance expert. Generate a Digital Battery Passport (DBP) for the following product.
 
-You are a compliance expert. Generate a Digital Product Passport (DPP) for the following product.
+Generate the DBP as a structured Asset Administration Shell (AAS) JSON document. The output must be a valid JSON object only — no prose outside the JSON.
+
+Use the provided battery technical specification document and populate the supplied AAS technical data submodel as provided in the template by the IDTA.
 
 PRODUCT:
-[Product details]
+{{PRODUCT_DATA}}
 
-KEY REQUIREMENTS (plain-language summary):
-[Plain-language DPP/AAS submodel requirements.]
+KEY REQUIREMENTS:
+- Preserve the JSON structure
+- Extract only relevant technical battery information as described in the template
+- Use metric units
+- Do not invent values
+- Leave unknown values empty
 
-Generate the DPP as a structured JSON document according to the Asset Administration Shell (AAS) submodel format that explicitly addresses each of the listed requirements. The output must be a valid JSON object only — no prose outside the JSON.
+MANDATORY DATA:
+- Battery chemistry
+- Critical raw materials
+- Materials used in the cathode, anode, and electrolyte
+- Hazardous substances
+- Impact of substances on the environment and on human health or safety
