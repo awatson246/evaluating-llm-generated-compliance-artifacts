@@ -1,0 +1,53 @@
+\begin{table}[t]
+  \centering
+  \caption{Mean regulatory compliance (completeness) scores for ESPR artifacts by model and vagueness level (mean $\pm$ std).}
+  \label{tab:espr_completeness}
+  \begin{tabular}{lcccc}
+    \toprule
+    Vagueness & Qwen-2.5 & Claude & GPT-4o & Llama-3.1 \\
+    \midrule
+    Baseline & 1.00$\pm$0.00 & 0.97$\pm$0.06 & 1.00$\pm$0.00 & 1.00$\pm$0.00 \\
+    Low & 1.00$\pm$0.00 & 0.88$\pm$0.08 & 1.00$\pm$0.00 & 1.00$\pm$0.00 \\
+    Medium & 1.00$\pm$0.00 & 0.85$\pm$0.09 & 1.00$\pm$0.00 & 1.00$\pm$0.00 \\
+    High & -- & 0.94$\pm$0.00 & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Cross-run consistency scores for ESPR artifacts by model and vagueness level.}
+  \label{tab:espr_consistency}
+  \begin{tabular}{lcccc}
+    \toprule
+    Vagueness & Qwen-2.5 & Claude & GPT-4o & Llama-3.1 \\
+    \midrule
+    Baseline & 1.00 & 0.95 & 1.00 & 1.00 \\
+    Low & 1.00 & 0.81 & 1.00 & 1.00 \\
+    Medium & 1.00 & 0.75 & 1.00 & 0.99 \\
+    High & -- & 0.80 & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Required field inclusion rates (\%) for ESPR artifacts, averaged across all vagueness levels. Fields below 50\% are systematically excluded.}
+  \label{tab:espr_field_inclusion}
+  \begin{tabular}{lcccc}
+    \toprule
+    Required field & Claude & GPT-4o & Llama-3.1 & Qwen-2.5 \\
+    \midrule
+    Clearname & 100\% & 100\% & 100\% & 100\% \\
+    Shortname & 100\% & 100\% & 100\% & 100\% \\
+    Batterymaterialidentifier & 100\% & 100\% & 100\% & 100\% \\
+    Batterymaterialmass & 100\% & 100\% & 100\% & 100\% \\
+    Batterymaterialname & 100\% & 100\% & 100\% & 100\% \\
+    Iscriticalrawmaterial & 100\% & 100\% & 100\% & 100\% \\
+    Hazardoussubstanceclass & 60\% & 100\% & 100\% & 100\% \\
+    Hazardoussubstanceconcentration & 35\% & 100\% & 100\% & 100\% \\
+    Hazardoussubstanceidentifier & 65\% & 100\% & 100\% & 100\% \\
+    Hazardoussubstancename & 100\% & 100\% & 100\% & 100\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}

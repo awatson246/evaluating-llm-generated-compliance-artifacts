@@ -272,6 +272,7 @@ def plot_field_heatmap(field_df: pd.DataFrame, task: str) -> None:
             linewidths=0.4, linecolor="white",
             cbar_kws={"label": "Inclusion rate", "shrink": 0.7},
         )
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=30, ha="right")
     else:
         im = ax.imshow(data, vmin=0, vmax=1, cmap=_HEATMAP_CMAP, aspect="auto")
         plt.colorbar(im, ax=ax, label="Inclusion rate", shrink=0.7)
