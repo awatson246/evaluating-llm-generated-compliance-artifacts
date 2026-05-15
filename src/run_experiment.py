@@ -65,7 +65,7 @@ def load_prompt(task: str, vagueness_level: str) -> str:
     ).read_text(encoding="utf-8")
 
     idta_template = (
-        PROMPTS_DIR / "IDTA 02035-4_DBP-Part-4_TechnicalData.json"
+        PROMPTS_DIR / "IDTA 02035-6_DBP-Part-6_MaterialComposition_without_examplevalues.json"
     ).read_text(encoding="utf-8")
 
     prompt_text = prompt_text.replace(
