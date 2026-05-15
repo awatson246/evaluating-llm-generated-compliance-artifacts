@@ -37,7 +37,6 @@ You are provided with:
 Generate the final AAS JSON.
 
 PRODUCT:
-This document contains material composition data for three battery products. Extract only the data for the product with Product Model = "Accelera EV-NMC-811" (Chemistry Short Name: NMC, Total Pack Mass: 450.0 kg). All material masses, hazardous substance concentrations, and CRM flags must come exclusively from Sections 4, 5, and 6 of this document. Ignore Section 7 (Cross-Product Shared Components Register) entirely - those values must not be attributed to this product.
 {{PRODUCT_DATA}}
 
 REGULATORY TEXT AND ANNOTATIONS:

@@ -1,7 +1,6 @@
 You are a compliance expert. Generate a Digital Batter Passport (DBP) for the following product.
 
 PRODUCT:
-Extract the material composition data for the Accelera EV-NMC-811 battery.
 {{PRODUCT_DATA}}
 
 REGULATORY TEXT:

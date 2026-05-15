@@ -5,7 +5,6 @@ Generate the DBP as a structured Asset Administration Shell (AAS) JSON document.
 Use the provided battery technical specification document and populate the supplied AAS technical data submodel as provided in the template by the IDTA.
 
 PRODUCT:
-This document contains data for multiple battery products. Extract all material composition data - battery chemistry, materials with CAS numbers and masses, and hazardous substances - for the product with model name Accelera EV-NMC-811. Do not mix in data from other products.
 {{PRODUCT_DATA}}
 
 KEY REQUIREMENTS:
