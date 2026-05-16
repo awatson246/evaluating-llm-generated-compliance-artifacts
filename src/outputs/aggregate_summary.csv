@@ -1,0 +1,16 @@
+model_id,task,vagueness_level,mean_completeness,std_completeness,n_runs,group_completeness,overall_consistency
+Qwen/Qwen2.5-7B-Instruct,espr,baseline,1.0,0.0,5,1.0,1.0
+Qwen/Qwen2.5-7B-Instruct,espr,high,1.0,0.0,5,1.0,1.0
+Qwen/Qwen2.5-7B-Instruct,espr,low,1.0,0.0,5,1.0,1.0
+Qwen/Qwen2.5-7B-Instruct,espr,medium,1.0,0.0,5,1.0,1.0
+claude-sonnet-4-6,espr,baseline,1.0,0.0,5,1.0,1.0
+claude-sonnet-4-6,espr,high,1.0,0.0,5,1.0,1.0
+claude-sonnet-4-6,espr,low,0.9742000000000001,0.05769055381949456,5,1.0,0.96
+claude-sonnet-4-6,espr,medium,0.8710000000000001,0.0789960442047575,5,1.0,0.7733
+gpt-4o,espr,baseline,1.0,0.0,5,1.0,1.0
+gpt-4o,espr,high,1.0,0.0,5,1.0,1.0
+gpt-4o,espr,low,1.0,0.0,5,1.0,1.0
+gpt-4o,espr,medium,1.0,0.0,5,1.0,1.0
+meta-llama/Llama-3.1-8B-Instruct,espr,baseline,1.0,0.0,5,1.0,1.0
+meta-llama/Llama-3.1-8B-Instruct,espr,low,1.0,0.0,5,1.0,1.0
+meta-llama/Llama-3.1-8B-Instruct,espr,medium,1.0,0.0,5,1.0,1.0
