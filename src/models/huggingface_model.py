@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 HF_CONTEXT_LIMITS: dict[str, int] = {
     "meta-llama/Llama-3.1-8B-Instruct": 32_768,
     "meta-llama/Llama-3.1-70B-Instruct": 131_072,
-    "mistralai/Mistral-7B-Instruct-v0.3": 32_768,
+    "mistralai/Mixtral-8x7B-Instruct-v0.1": 32_768,
     "Qwen/Qwen2.5-72B-Instruct": 131_072,
 }
 

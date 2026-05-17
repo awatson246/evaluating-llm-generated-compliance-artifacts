@@ -37,7 +37,7 @@ MODEL_SHORT: dict[str, str] = {
     "gpt-4o":                               "GPT-4o",
     "claude-sonnet-4-6":                    "Claude",
     "Llama-3.1-8B-Instruct":               "Llama-3.1",
-    "Mistral-7B-Instruct-v0.2":            "Mistral",
+    "open-mistral-7b":                     "Mistral-7B",
     "Qwen2.5-7B-Instruct":                 "Qwen-2.5",
 }
 

@@ -5,6 +5,7 @@ api_keys:
   openai: "sk-..."
   anthropic: "sk-ant-..."
   huggingface: "hf_..."
+  mistral: "..."
 
 models:
   - provider: openai
@@ -14,8 +15,8 @@ models:
   - provider: huggingface
     # Requires accepting the Meta license at huggingface.co/meta-llama/Llama-3.1-8B-Instruct
     model_id: meta-llama/Llama-3.1-8B-Instruct
-  - provider: huggingface
-    model_id: mistralai/Mistral-7B-Instruct-v0.2
+  - provider: mistral
+    model_id: open-mistral-7b
   - provider: huggingface
     model_id: Qwen/Qwen2.5-7B-Instruct
 
