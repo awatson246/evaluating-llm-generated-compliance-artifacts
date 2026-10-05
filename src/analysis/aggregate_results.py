@@ -5,6 +5,7 @@ Outputs
 -------
   outputs/aggregate_summary.csv   per-(model, task, vagueness_level) metrics
   outputs/field_stability.csv     per-(model, task, vagueness_level, field_id) stability
+  outputs/significance_tests.csv  vagueness-level comparisons per (model, task)
 
 Usage:
     cd src
@@ -23,6 +24,7 @@ import pandas as pd
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
 from scoring.schema_scorer import SchemaScorer  # noqa: E402
+from analysis.statistics import SIG_CSV, bootstrap_cis, significance_tests  # noqa: E402
 
 log = logging.getLogger(__name__)
 
@@ -75,6 +77,7 @@ def build_per_run_summary(records: list[dict]) -> pd.DataFrame:
             "completeness_score":  r.get("completeness_score",      float("nan")),
             "group_completeness":  r.get("group_completeness_score", float("nan")),
             "overall_consistency": r.get("overall_consistency",      float("nan")),
+            "overall_agreement":   r.get("overall_agreement",        float("nan")),
             "latency_seconds":     r.get("latency_seconds",          float("nan")),
         })
     return pd.DataFrame(rows)
@@ -109,7 +112,7 @@ def build_field_stability(records: list[dict]) -> pd.DataFrame:
 def aggregate(df: pd.DataFrame) -> pd.DataFrame:
     """
     Collapse per-run rows to per-(model, task, vagueness_level) group stats.
-    group_completeness and overall_consistency are group-level values stored
+    group_completeness, overall_consistency and overall_agreement are group-level values stored
     identically on every run in the group, so we just take the first.
     """
     per_run = (
@@ -123,7 +126,7 @@ def aggregate(df: pd.DataFrame) -> pd.DataFrame:
     )
     group_lvl = (
         df.groupby(["model_id", "task", "vagueness_level"], sort=False)
-        .first()[["group_completeness", "overall_consistency"]]
+        .first()[["group_completeness", "overall_consistency", "overall_agreement"]]
         .reset_index()
     )
     return per_run.merge(group_lvl, on=["model_id", "task", "vagueness_level"])
@@ -136,10 +139,15 @@ def main() -> None:
     records = load_scored_outputs()
     if not records:
         return
+    if any("overall_agreement" not in r for r in records):
+        log.warning("Some scored outputs predate the agreement metric - "
+                    "re-run run_scoring.py to populate overall_agreement")
 
     per_run   = build_per_run_summary(records)
-    agg       = aggregate(per_run)
+    agg       = aggregate(per_run).merge(
+        bootstrap_cis(records), on=["model_id", "task", "vagueness_level"], how="left")
     field_stab = build_field_stability(records)
+    sig       = significance_tests(per_run, level_order=["baseline", "low", "medium", "high"])
 
     AGGREGATE_CSV.parent.mkdir(parents=True, exist_ok=True)
     agg.to_csv(AGGREGATE_CSV, index=False)
@@ -147,6 +155,14 @@ def main() -> None:
 
     field_stab.to_csv(FIELD_STAB_CSV, index=False)
     log.info("Saved -> %s", FIELD_STAB_CSV)
+
+    sig.to_csv(SIG_CSV, index=False)
+    log.info("Saved -> %s", SIG_CSV)
+
+    for task, sub in agg.groupby("task"):
+        counts = sorted(sub["n_runs"].unique())
+        if len(counts) > 1:
+            log.warning("Task %s has unequal run counts across conditions: %s", task, counts)
 
     print(agg.to_string(index=False))
 

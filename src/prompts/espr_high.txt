@@ -5,8 +5,6 @@ You are also an expert in Asset Administration Shells (AAS), and battery materia
 
 Your task is to generate a valid AAS JSON representation for the DBP AAS Material Composition submodel.
 
-Generate the DBP as a structured JSON document. The output must be a valid JSON object only — no prose outside the JSON.
-
 The Digital Battery Passport is part of emerging industrial data interoperability standards for battery lifecycle transparency, sustainability, and traceability.
 
 The Material Composition submodel contains structured battery properties including:

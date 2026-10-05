@@ -57,6 +57,9 @@ class HuggingFaceModel(BaseModel):
 
         return min(requested_max, headroom)
 
+    def effective_max_tokens(self, prompt: str) -> int:
+        return self._safe_max_tokens(prompt, self.max_tokens)
+
     async def generate(self, prompt: str, **kwargs) -> ModelResponse:
         requested_max = kwargs.get("max_tokens", self.max_tokens)
         safe_max = self._safe_max_tokens(prompt, requested_max)

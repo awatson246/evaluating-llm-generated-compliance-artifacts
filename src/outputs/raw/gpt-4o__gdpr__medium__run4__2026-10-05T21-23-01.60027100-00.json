@@ -1,0 +1,20 @@
+{
+  "model_id": "gpt-4o",
+  "task": "gdpr",
+  "vagueness_level": "medium",
+  "run_number": 4,
+  "timestamp": "2026-10-05T21:23:01.600271+00:00",
+  "raw_response": "```json\n{\n  \"systematicDescription\": {\n    \"dataCollected\": [\n      \"GPS location data\",\n      \"Package-handling throughput data\",\n      \"Biometric entry and exit scan data\",\n      \"Task completion patterns\"\n    ],\n    \"dataSubjects\": \"Warehouse operatives and delivery drivers\",\n    \"purposes\": [\n      \"Automate shift scheduling\",\n      \"Generate real-time performance rankings\",\n      \"Produce automated underperformance flags\"\n    ],\n    \"dataFlow\": \"Data is collected from GPS devices, biometric scanners, and task tracking systems, processed by an AI-driven platform, and then used to inform HR review and employment decisions.\",\n    \"dataRetention\": \"Data is retained for 2 years after collection to allow for performance trend analysis and potential dispute resolution.\"\n  },\n  \"necessityAndProportionality\": {\n    \"necessity\": \"The processing is necessary to optimize resource allocation and improve operational efficiency in a large-scale logistics operation.\",\n    \"proportionality\": \"Data collected is limited to what is necessary for operational optimization, and measures are in place to minimize intrusiveness.\",\n    \"lawfulBasis\": \"The lawful basis for processing is legitimate interests, with additional consent obtained for biometric data.\",\n    \"dataSubjectRights\": {\n      \"access\": \"Data subjects can request access to their data.\",\n      \"rectification\": \"Mechanisms are in place to correct inaccurate data.\",\n      \"objection\": \"Data subjects can object to processing on legitimate interest grounds.\",\n      \"erasure\": \"Data subjects can request data deletion in line with GDPR Article 17.\"\n    }\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"description\": \"Unauthorized access to personal data\",\n        \"likelihood\": \"Medium\",\n        \"severity\": \"High\",\n        \"vulnerableGroups\": \"Employees with limited digital literacy\"\n      },\n      {\n        \"description\": \"Inaccurate performance assessments leading to unjust HR decisions\",\n        \"likelihood\": \"Medium\",\n        \"severity\": \"High\",\n        \"vulnerableGroups\": \"New employees, employees with disabilities\"\n      },\n      {\n        \"description\": \"Location data misuse\",\n        \"likelihood\": \"Low\",\n        \"severity\": \"High\",\n        \"vulnerableGroups\": \"All employees\"\n      }\n    ]\n  },\n  \"riskMitigationMeasures\": {\n    \"technicalControls\": [\n      \"End-to-end encryption of data in transit and at rest\",\n      \"Multi-factor authentication for system access\",\n      \"Regular security audits and penetration testing\"\n    ],\n    \"organizationalPolicies\": [\n      \"Comprehensive data protection training for all employees\",\n      \"Strict access controls and role-based access restrictions\",\n      \"Regular review and update of data protection policies\"\n    ],\n    \"residualRisk\": \"Low to medium after implementing mitigation measures\"\n  }\n}\n```",
+  "usage": {
+    "prompt_tokens": 333,
+    "completion_tokens": 587,
+    "total_tokens": 920
+  },
+  "latency_seconds": 7.002,
+  "parsed_fields": {},
+  "generation": {
+    "temperature": 0.7,
+    "max_tokens": 6000
+  },
+  "prompt_sha256": "887e8d3eec88de229181553cc8d1ec01c789cd9357316c87ff28f2df77a1b2d6"
+}

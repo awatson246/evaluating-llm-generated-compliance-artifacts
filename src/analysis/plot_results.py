@@ -178,7 +178,7 @@ def plot_metric_bars(agg_df: pd.DataFrame, task: str,
                      title: str, stem: str) -> None:
     """
     Grouped bar chart: x = vagueness level, groups = models.
-    Error bars show std (completeness only; consistency is group-level).
+    Error bars show 95% bootstrap CIs over runs (both metrics).
     """
     task_df = agg_df[agg_df["task"] == task].copy()
     task_df["model_short"] = task_df["model_id"].apply(_short_model)
@@ -202,19 +202,25 @@ def plot_metric_bars(agg_df: pd.DataFrame, task: str,
             row = mdf[mdf["vagueness_level"] == lv]
             if row.empty:
                 values.append(0.0)
-                errors.append(0.0)
+                errors.append((0.0, 0.0))
             else:
-                values.append(float(row[metric].iloc[0]))
-                std_col = "std_completeness" if metric == "mean_completeness" else None
-                errors.append(float(row[std_col].iloc[0])
-                              if std_col and not pd.isna(row[std_col].iloc[0]) else 0.0)
+                val    = float(row[metric].iloc[0])
+                prefix = {"mean_completeness":   "completeness",
+                          "overall_consistency": "consistency",
+                          "overall_agreement":   "agreement"}[metric]
+                lo     = row[f"{prefix}_ci_low"].iloc[0]  if f"{prefix}_ci_low"  in row else np.nan
+                hi     = row[f"{prefix}_ci_high"].iloc[0] if f"{prefix}_ci_high" in row else np.nan
+                values.append(val)
+                errors.append((0.0, 0.0) if pd.isna(lo) or pd.isna(hi)
+                              else (max(val - lo, 0.0), max(hi - val, 0.0)))
+        yerr = np.array(errors).T  # (2, n_levels): lower, upper
 
         ax.bar(x + offset[i], values, width,
                label=model,
                color=_PALETTE[i % len(_PALETTE)],
                hatch=_HATCHES[i % len(_HATCHES)],
                edgecolor='black', linewidth=0.5,
-               yerr=errors if any(e > 0 for e in errors) else None,
+               yerr=yerr if yerr.any() else None,
                capsize=2, error_kw={"linewidth": 0.8, "ecolor": "black"})
 
     ax.set_xticks(x)
@@ -391,6 +397,14 @@ def main() -> None:
             title=f"{tl} — Cross-run Consistency by Vagueness Level",
             stem=f"consistency_{task}",
         )
+        if agg_df.loc[agg_df["task"] == task, "overall_agreement"].notna().any():
+            plot_metric_bars(
+                agg_df, task,
+                metric="overall_agreement",
+                ylabel="Pairwise agreement",
+                title=f"{tl} — Cross-run Agreement by Vagueness Level",
+                stem=f"agreement_{task}",
+            )
         plot_field_heatmap(field_df, task)
         plot_completeness_vs_consistency(agg_df, task)
 

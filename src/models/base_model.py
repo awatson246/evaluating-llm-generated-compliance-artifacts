@@ -20,6 +20,14 @@ class BaseModel(ABC):
         self.max_tokens: int = kwargs.get("max_tokens", 6000)
         self.temperature: float = kwargs.get("temperature", 0.7)
 
+    def effective_max_tokens(self, prompt: str) -> int:
+        """
+        Output cap this model will actually get for this prompt: the configured
+        max_tokens, lowered where the provider or context window can't allow it.
+        Recorded with each run so truncation can be detected against the real cap.
+        """
+        return self.max_tokens
+
     @abstractmethod
     async def generate(self, prompt: str, **kwargs) -> ModelResponse:
         """Send prompt to the model and return a structured response."""

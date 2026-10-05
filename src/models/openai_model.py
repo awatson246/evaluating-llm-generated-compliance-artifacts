@@ -6,18 +6,26 @@ from openai import AsyncOpenAI
 
 from .base_model import BaseModel, ModelResponse
 
+# Provider maximum output tokens; the API rejects requests above these.
+OPENAI_MAX_OUTPUT: dict[str, int] = {
+    "gpt-4o": 16_384,
+}
+
 
 class OpenAIModel(BaseModel):
     def __init__(self, model_id: str, api_key: str, **kwargs):
         super().__init__(model_id, api_key, **kwargs)
         self.client = AsyncOpenAI(api_key=api_key)
 
+    def effective_max_tokens(self, prompt: str) -> int:
+        return min(self.max_tokens, OPENAI_MAX_OUTPUT.get(self.model_id, self.max_tokens))
+
     async def generate(self, prompt: str, **kwargs) -> ModelResponse:
         t0 = time.perf_counter()
         response = await self.client.chat.completions.create(
             model=self.model_id,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=kwargs.get("max_tokens", self.max_tokens),
+            max_tokens=kwargs.get("max_tokens", self.effective_max_tokens(prompt)),
             temperature=kwargs.get("temperature", self.temperature),
         )
         return ModelResponse(

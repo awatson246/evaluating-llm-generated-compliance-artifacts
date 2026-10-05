@@ -1,0 +1,14 @@
+{
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.2",
+  "task": "gdpr",
+  "vagueness_level": "medium",
+  "run_number": 3,
+  "timestamp": "2026-05-05T17:47:42.744077+00:00",
+  "raw_response": "{\n  \"DPIA\": {\n    \"Description\": {\n      \"Data\": {\n        \"Types\": [\"GPS location tracks\", \"Package-handling throughput\", \"Biometric data\", \"Task completion patterns\"],\n        \"Subjects\": [\"Approximately 12,000 warehouse operatives and delivery drivers\"]\n      },\n      \"Purposes\": [\"Automate shift scheduling\", \"Generate real-time performance rankings\", \"Produce automated underperformance flags\"],\n      \"Flows\": {\n        \"Data In\": {\n          \"Source\": \"Warehouse operatives and delivery drivers\",\n          \"Channel\": \"Biometric entry and exit scans, GPS tracking devices, data input by employees\"\n        },\n        \"Data Within\": {\n          \"Systems\": [\"AI-driven workforce management platform\"]\n        },\n        \"Data Out\": {\n          \"Recipients\": [\"HR review and employment decision workflows\"]\n        },\n        \"Retention\": {\n          \"Period\": \"As long as necessary for employment decision-making\"\n        }\n      }\n    },\n    \"Necessity\": {\n      \"Alternatives\": [\"Manual shift scheduling and performance evaluation\"],\n      \"Lawful Basis\": [\"Legitimate interests of the parcel logistics operator in optimizing workforce management\"],\n      \"Rights\": [\"Data subjects have the right to access, rectify, erase, restrict, and object to processing of their data\"]\n    },\n    \"Risks\": {\n      \"Identifiability\": {\n        \"Likelihood\": \"Likely\",\n        \"Impact\": \"High\"\n      },\n      \"Integrity\": {\n        \"Likelihood\": \"Medium\",\n        \"Impact\": \"Medium to High\"\n      },\n      \"Discrimination\": {\n        \"Likelihood\": \"Medium\",\n        \"Impact\": \"High\"\n      },\n      \"Privacy\": {\n        \"Likelihood\": \"High\",\n        \"Impact\": \"High\"\n      },\n      \"VulnerableGroups\": {\n        \"Groups\": [\"Employees with disabilities or health conditions\"],\n        \"Impact\": \"High\"\n      }\n    },\n    \"Mitigation\": {\n      \"Technical\": [\"Encryption of data at rest and in transit, access controls, regular vulnerability scans and penetration testing\"],\n      \"Organizational\": [\"Employee training on data protection policies, clear communication on data processing, designated data protection officer\"],\n      \"Residual Risk\": \"Low\"\n    }\n  }\n}",
+  "usage": {
+    "input_tokens": 387,
+    "output_tokens": 596
+  },
+  "latency_seconds": 31.458,
+  "parsed_fields": {}
+}

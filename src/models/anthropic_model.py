@@ -14,12 +14,15 @@ class AnthropicModel(BaseModel):
 
     async def generate(self, prompt: str, **kwargs) -> ModelResponse:
         t0 = time.perf_counter()
-        response = await self.client.messages.create(
+        # Streamed because the SDK refuses non-streaming requests whose
+        # max_tokens could run past its 10-minute limit (large caps).
+        async with self.client.messages.stream(
             model=self.model_id,
             max_tokens=kwargs.get("max_tokens", self.max_tokens),
             temperature=kwargs.get("temperature", self.temperature),
             messages=[{"role": "user", "content": prompt}],
-        )
+        ) as stream:
+            response = await stream.get_final_message()
         return ModelResponse(
             model_id=self.model_id,
             raw_text=response.content[0].text,

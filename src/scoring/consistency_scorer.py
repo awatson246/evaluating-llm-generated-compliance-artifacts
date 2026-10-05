@@ -10,6 +10,14 @@ and computes how stable each field's presence is across runs.
 
   overall_consistency = mean field_stability across all fields evaluated.
 
+  field_agreement[field_id] = fraction of run pairs that agree on the field
+    (both include it or both omit it). With n runs and k inclusions:
+        [C(k,2) + C(n-k,2)] / C(n,2)
+    Unlike field_stability, a field omitted in every run scores 1.0 - the model
+    is consistent about leaving it out. Undefined (NaN) for a single run.
+
+  overall_agreement = mean field_agreement across all fields evaluated.
+
   stable_fields   = field IDs with stability >= stability_threshold
   unstable_fields = field IDs with stability <  stability_threshold
 
@@ -19,6 +27,7 @@ which directly captures the reproducibility requirement described in the paper.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 
@@ -28,11 +37,15 @@ class ConsistencyResult:
     overall_consistency: float = 0.0
     stable_fields: list[str] = field(default_factory=list)
     unstable_fields: list[str] = field(default_factory=list)
+    field_agreement: dict[str, float] = field(default_factory=dict)
+    overall_agreement: float = float("nan")
 
     def to_dict(self) -> dict:
         return {
             "field_stability":    self.field_stability,
             "overall_consistency": self.overall_consistency,
+            "field_agreement":    self.field_agreement,
+            "overall_agreement":  self.overall_agreement,
             "stable_fields":      self.stable_fields,
             "unstable_fields":    self.unstable_fields,
         }
@@ -83,9 +96,26 @@ class ConsistencyScorer:
 
         overall = sum(field_stability.values()) / len(field_stability) if field_stability else 0.0
 
+        field_agreement = {
+            fid: pairwise_agreement(round(s * n), n) for fid, s in field_stability.items()
+        }
+        overall_agreement = (
+            sum(field_agreement.values()) / len(field_agreement)
+            if field_agreement else float("nan")
+        )
+
         return ConsistencyResult(
             field_stability={fid: round(s, 4) for fid, s in field_stability.items()},
             overall_consistency=round(overall, 4),
             stable_fields=sorted(stable),
             unstable_fields=sorted(unstable),
+            field_agreement={fid: round(a, 4) for fid, a in field_agreement.items()},
+            overall_agreement=round(overall_agreement, 4),
         )
+
+
+def pairwise_agreement(k: int, n: int) -> float:
+    """Fraction of the C(n,2) run pairs that agree, given k of n runs include the field."""
+    if n < 2:
+        return float("nan")
+    return (math.comb(k, 2) + math.comb(n - k, 2)) / math.comb(n, 2)

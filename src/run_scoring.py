@@ -126,6 +126,8 @@ def score_all(records: list[dict], stability_threshold: float = 1.0) -> list[dic
             scored["group_missing_required"]    = group_result.missing_required
             scored["overall_consistency"]       = consistency_result.overall_consistency
             scored["field_stability"]           = consistency_result.field_stability
+            scored["overall_agreement"]         = consistency_result.overall_agreement
+            scored["field_agreement"]           = consistency_result.field_agreement
             scored["stable_fields"]             = consistency_result.stable_fields
             scored["unstable_fields"]           = consistency_result.unstable_fields
             scored_records.append(scored)

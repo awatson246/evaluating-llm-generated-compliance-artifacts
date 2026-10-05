@@ -35,7 +35,16 @@ vagueness_levels:
   - high
   - baseline
 
-num_runs: 3
+# Runs per (model, task, vagueness_level) condition. Field-inclusion rates can
+# only take N+1 distinct values, and CI width shrinks with sqrt(N); 20 gives 5%
+# resolution. Raising this later only generates the missing run numbers.
+num_runs: 20
+
+# Generation settings passed to every model. Recorded in each raw output so
+# batches collected at different times can be checked before being pooled.
+generation:
+  temperature: 0.7
+  max_tokens: 32000
 
 # Limit concurrent API calls to avoid rate limits.
 max_concurrent: 5

@@ -1,0 +1,20 @@
+{
+  "model_id": "gpt-4o",
+  "task": "gdpr",
+  "vagueness_level": "medium",
+  "run_number": 12,
+  "timestamp": "2026-10-05T21:23:13.067260+00:00",
+  "raw_response": "```json\n{\n  \"systematicDescription\": {\n    \"dataCollection\": {\n      \"typesOfData\": [\n        \"GPS location tracks\",\n        \"Package-handling throughput\",\n        \"Biometric entry and exit scans\",\n        \"Task completion patterns\"\n      ],\n      \"dataSubjects\": \"Warehouse operatives and delivery drivers\",\n      \"purposes\": [\n        \"Automate shift scheduling\",\n        \"Generate real-time performance rankings\",\n        \"Produce automated underperformance flags\"\n      ],\n      \"dataFlow\": \"Data is collected continuously from GPS devices, biometric scanners, and task management systems. It is processed by the AI-driven workforce management platform and flows into HR review and employment decision workflows.\",\n      \"dataRetention\": \"Data is retained for a period of 2 years, after which it is anonymized or securely deleted.\"\n    }\n  },\n  \"necessityAndProportionalityAssessment\": {\n    \"dataMinimization\": \"The system collects data necessary for optimizing workforce management and improving operational efficiency. Alternative methods without data collection would not achieve the same level of efficiency.\",\n    \"lawfulBasis\": \"The lawful basis for processing is legitimate interests of the company in optimizing workforce management and contractual necessity due to employment agreements.\",\n    \"dataSubjectRights\": \"Data subjects can access their data, request corrections, and object to processing. Procedures are in place to ensure these rights can be exercised effectively.\"\n  },\n  \"riskAssessment\": {\n    \"potentialRisks\": [\n      {\n        \"risk\": \"Unauthorized access to personal data\",\n        \"likelihood\": \"Medium\",\n        \"severity\": \"High\"\n      },\n      {\n        \"risk\": \"Inaccurate performance rankings\",\n        \"likelihood\": \"Medium\",\n        \"severity\": \"Medium\"\n      },\n      {\n        \"risk\": \"Biometric data breach\",\n        \"likelihood\": \"Low\",\n        \"severity\": \"High\"\n      },\n      {\n        \"risk\": \"Discrimination based on automated decision-making\",\n        \"likelihood\": \"Medium\",\n        \"severity\": \"High\"\n      }\n    ],\n    \"vulnerableGroups\": \"Employees who may be subject to unfair treatment based on performance data.\"\n  },\n  \"riskMitigationMeasures\": {\n    \"technicalControls\": [\n      \"Encryption of all data at rest and in transit\",\n      \"Multi-factor authentication for system access\",\n      \"Regular security audits and penetration testing\"\n    ],\n    \"organizationalPolicies\": [\n      \"Data protection training for all employees\",\n      \"Strict access controls and role-based data access\",\n      \"Regular reviews of automated decision-making algorithms\"\n    ],\n    \"residualRisk\": \"Residual risk is considered low after implementing the above measures, with ongoing monitoring to ensure risk levels remain acceptable.\"\n  }\n}\n```",
+  "usage": {
+    "prompt_tokens": 333,
+    "completion_tokens": 562,
+    "total_tokens": 895
+  },
+  "latency_seconds": 6.564,
+  "parsed_fields": {},
+  "generation": {
+    "temperature": 0.7,
+    "max_tokens": 6000
+  },
+  "prompt_sha256": "887e8d3eec88de229181553cc8d1ec01c789cd9357316c87ff28f2df77a1b2d6"
+}

@@ -9,10 +9,15 @@ The regulatory language used in the ESPR and GDPR is inherently vague; while hum
 | **Tasks** | ESPR/DPP (AAS submodel), GDPR/DPIA (Article 35(7)) |
 | **Vagueness levels** | Baseline (direct quote from regulation), Low (task only), Medium (task + plain-language summary), High (task + regulatory text) |
 | **Models** | GPT-4o, Claude Sonnet 4.6, Llama 3.1, Mistral, Qwen-2.5 |
-| **Runs per condition** | 3 |
-| **Total conditions** | 2 tasks × 4 levels × 5 models × 3 runs = **120 runs** |
+| **Runs per condition** | 20 (set via `num_runs` or `--runs`) |
+| **Total conditions** | 2 tasks × 4 levels × 5 models × 20 runs = **800 runs** |
 
-Each run produces a structured JSON artifact that is scored for (1) field completeness against a schema and (2) cross-run consistency.
+Each run produces a structured JSON artifact that is scored for:
+
+- **Completeness**: the fraction of the schema's required fields that a single generated artifact actually includes.
+- **Consistency**: how reliably repeated runs of the same prompt and model make the same decisions about which fields to include. Reported two ways:
+  - `overall_consistency`: mean per-field inclusion rate across runs. A field omitted in every run scores 0, so this partly tracks completeness.
+  - `overall_agreement`: mean per-field fraction of run pairs that make the same include/omit decision, `[C(k,2) + C(n-k,2)] / C(n,2)` for a field included in k of n runs. A field omitted in every run scores 1.
 
 ## Repository Structure
 
@@ -36,7 +41,8 @@ src/
 │   ├── raw/                           # One JSON per run (gitignored contents)
 │   └── scored/                        # Scored results per condition (gitignored contents)
 ├── analysis/
-│   ├── aggregate_results.py           # Compile scores → summary CSV
+│   ├── aggregate_results.py           # Compile scores → summary CSV (+ bootstrap CIs)
+│   ├── statistics.py                  # Bootstrap CIs + significance tests
 │   └── export_tables.py               # Summary CSV → LaTeX tables
 ├── run_experiment.py                  # Main orchestrator (async)
 ├── config.yaml                        # API keys + run settings (gitignored)
@@ -86,6 +92,15 @@ Or only GDPR tasks:
 cd src
 python run_experiment.py --task gdpr
 ```
+
+## Adding More Runs
+
+Runs are keyed by run number, so raising the run count only generates the missing ones; existing outputs are kept:
+```bash
+cd src
+python run_experiment.py --runs 20
+```
+Each raw output records its `generation` settings (temperature, max_tokens) and a `prompt_sha256`, so you can check that runs collected in different batches are poolable.
 
 ## Running the Full Experiment
 
@@ -153,15 +168,19 @@ python analysis/export_tables.py
 python analysis/plot_results.py
 ```
 This returns: 
-1. outputs/aggregate_summary.csv — per-(model, task, level): mean_completeness, std_completeness, group_completeness, overall_consistency, n_runs
+1. outputs/aggregate_summary.csv — per-(model, task, level): mean_completeness, std_completeness, group_completeness, overall_consistency, overall_agreement, n_runs, plus 95% bootstrap CIs (`completeness_ci_*`, `consistency_ci_*`, `agreement_ci_*`; 10,000 resamples of runs, seed 0; the agreement CI is bias-corrected because resampled duplicate runs always agree)
 2. outputs/field_stability.csv — per-(model, task, level, field): stability score + required flag
-3. outputs/latex_tables.tex — 3 tables per task, drop-in ready:
-  - Completeness (mean ± std, includes baseline row)
+3. outputs/significance_tests.csv — per-(model, task): Kruskal-Wallis across vagueness levels, then pairwise Mann-Whitney U with Holm correction and Cliff's delta
+4. outputs/latex_tables.tex — 4 tables per task, drop-in ready:
+  - Completeness (mean [95% CI], includes baseline row)
   - Consistency (same layout)
+  - Agreement (same layout)
   - Required field inclusion rates
-4. outputs/figures/ — 4 figures per task (PDF + PNG):
-  - completeness_<task> — grouped bars by vagueness level
+  - Pairwise vagueness-level significance
+5. outputs/figures/ — 5 figures per task (PDF + PNG):
+  - completeness_<task> — grouped bars by vagueness level, 95% CI error bars
   - consistency_<task> — same for consistency
+  - agreement_<task> — same for agreement
   - field_heatmap_<task> — heatmap of field inclusion, sorted with most-excluded fields at top
   - completeness_vs_consistency_<task> — scatter with model shapes and vagueness colours
 

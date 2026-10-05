@@ -1,0 +1,20 @@
+{
+  "model_id": "gpt-4o",
+  "task": "gdpr",
+  "vagueness_level": "medium",
+  "run_number": 14,
+  "timestamp": "2026-10-05T21:23:12.984031+00:00",
+  "raw_response": "```json\n{\n  \"systematicDescription\": {\n    \"dataCollected\": [\n      \"GPS location tracks\",\n      \"Package-handling throughput\",\n      \"Biometric entry and exit scans\",\n      \"Task completion patterns\"\n    ],\n    \"dataSubjects\": [\n      \"Warehouse operatives\",\n      \"Delivery drivers\"\n    ],\n    \"purposes\": [\n      \"Automate shift scheduling\",\n      \"Generate real-time performance rankings\",\n      \"Produce automated underperformance flags\"\n    ],\n    \"dataFlow\": \"Data is collected continuously at distribution and sorting centers, processed by the AI platform, and results are shared with HR for review.\",\n    \"retentionPeriod\": \"Data is retained for a period of 24 months, after which it is permanently deleted.\"\n  },\n  \"necessityAndProportionality\": {\n    \"lessIntrusiveMeans\": \"Manual scheduling and performance reviews are significantly less efficient and lack real-time capabilities.\",\n    \"lawfulBasis\": \"Legitimate interests of the organization in improving operational efficiency and managing workforce performance.\",\n    \"dataSubjectRights\": [\n      \"Right to access their own data\",\n      \"Right to rectification\",\n      \"Right to object to processing\",\n      \"Opt-out options for non-essential data processing\"\n    ]\n  },\n  \"riskAssessment\": {\n    \"risks\": [\n      {\n        \"risk\": \"Unauthorized access to personal data\",\n        \"likelihood\": \"Medium\",\n        \"severity\": \"High\"\n      },\n      {\n        \"risk\": \"Inaccurate performance rankings affecting employment decisions\",\n        \"likelihood\": \"Low\",\n        \"severity\": \"High\"\n      },\n      {\n        \"risk\": \"Biometric data breach\",\n        \"likelihood\": \"Low\",\n        \"severity\": \"Very High\"\n      },\n      {\n        \"risk\": \"Location tracking misuse\",\n        \"likelihood\": \"Medium\",\n        \"severity\": \"Medium\"\n      }\n    ],\n    \"vulnerableGroups\": [\n      \"Employees with disabilities\",\n      \"Employees from minority backgrounds\"\n    ]\n  },\n  \"mitigationMeasures\": {\n    \"technicalControls\": [\n      \"Data encryption both in transit and at rest\",\n      \"Multi-factor authentication for system access\",\n      \"Regular security audits and penetration testing\"\n    ],\n    \"organizationalPolicies\": [\n      \"Comprehensive data protection training for all employees\",\n      \"Strict access control policies\",\n      \"Incident response plan for data breaches\"\n    ],\n    \"residualRisk\": \"Low\"\n  }\n}\n```",
+  "usage": {
+    "prompt_tokens": 333,
+    "completion_tokens": 510,
+    "total_tokens": 843
+  },
+  "latency_seconds": 4.749,
+  "parsed_fields": {},
+  "generation": {
+    "temperature": 0.7,
+    "max_tokens": 6000
+  },
+  "prompt_sha256": "887e8d3eec88de229181553cc8d1ec01c789cd9357316c87ff28f2df77a1b2d6"
+}
