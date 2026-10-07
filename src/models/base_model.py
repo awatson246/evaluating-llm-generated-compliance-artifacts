@@ -11,6 +11,9 @@ class ModelResponse:
     raw_text: str
     usage: dict[str, Any]
     latency_seconds: float
+    # Model the provider reports having served. Can differ from model_id when
+    # the requested name is an alias (gpt-4o) or a retired, redirected model.
+    served_model: str | None = None
 
 
 class BaseModel(ABC):

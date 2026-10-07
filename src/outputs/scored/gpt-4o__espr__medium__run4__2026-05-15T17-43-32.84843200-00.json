@@ -52,6 +52,24 @@
     "hazardoussubstances.hazardoussubstance.hazardoussubstancelocation.componentname": 1.0,
     "hazardoussubstances.hazardoussubstance.hazardoussubstancename": 1.0
   },
+  "overall_agreement": 1.0,
+  "field_agreement": {
+    "batterychemistry.clearname": 1.0,
+    "batterychemistry.shortname": 1.0,
+    "batterymaterials.batterymaterial.batterymaterialidentifier": 1.0,
+    "batterymaterials.batterymaterial.batterymateriallocation.componentid": 1.0,
+    "batterymaterials.batterymaterial.batterymateriallocation.componentname": 1.0,
+    "batterymaterials.batterymaterial.batterymaterialmass": 1.0,
+    "batterymaterials.batterymaterial.batterymaterialname": 1.0,
+    "batterymaterials.batterymaterial.iscriticalrawmaterial": 1.0,
+    "hazardoussubstances.hazardoussubstance.hazardoussubstanceclass": 1.0,
+    "hazardoussubstances.hazardoussubstance.hazardoussubstanceconcentration": 1.0,
+    "hazardoussubstances.hazardoussubstance.hazardoussubstanceidentifier": 1.0,
+    "hazardoussubstances.hazardoussubstance.hazardoussubstanceimpact.impact": 1.0,
+    "hazardoussubstances.hazardoussubstance.hazardoussubstancelocation.componentid": 1.0,
+    "hazardoussubstances.hazardoussubstance.hazardoussubstancelocation.componentname": 1.0,
+    "hazardoussubstances.hazardoussubstance.hazardoussubstancename": 1.0
+  },
   "stable_fields": [
     "batterychemistry.clearname",
     "batterychemistry.shortname",

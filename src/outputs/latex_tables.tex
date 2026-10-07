@@ -1,31 +1,47 @@
 \begin{table}[t]
   \centering
-  \caption{Mean regulatory compliance (completeness) scores for ESPR artifacts by model and vagueness level (mean $\pm$ std).}
+  \caption{Mean regulatory compliance (completeness) scores for ESPR artifacts by model and vagueness level (mean [95\% bootstrap CI over runs]).}
   \label{tab:espr_completeness}
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Qwen-2.5 & Claude & GPT-4o & Llama-3.1 \\
+    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
     \midrule
-    Baseline & 1.00$\pm$0.00 & 1.00$\pm$0.00 & 1.00$\pm$0.00 & 1.00$\pm$0.00 \\
-    Low & 1.00$\pm$0.00 & 0.97$\pm$0.06 & 1.00$\pm$0.00 & 1.00$\pm$0.00 \\
-    Medium & 1.00$\pm$0.00 & 0.87$\pm$0.08 & 1.00$\pm$0.00 & 1.00$\pm$0.00 \\
-    High & 1.00$\pm$0.00 & 1.00$\pm$0.00 & 1.00$\pm$0.00 & -- \\
+    Baseline & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.99 {\scriptsize [0.97, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    Low & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.99 {\scriptsize [0.97, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    Medium & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    High & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \begin{table}[t]
   \centering
-  \caption{Cross-run consistency scores for ESPR artifacts by model and vagueness level.}
+  \caption{Cross-run consistency scores for ESPR artifacts by model and vagueness level (mean [95\% bootstrap CI over runs]).}
   \label{tab:espr_consistency}
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Qwen-2.5 & Claude & GPT-4o & Llama-3.1 \\
+    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
     \midrule
-    Baseline & 1.00 & 1.00 & 1.00 & 1.00 \\
-    Low & 1.00 & 0.96 & 1.00 & 1.00 \\
-    Medium & 1.00 & 0.77 & 1.00 & 1.00 \\
-    High & 1.00 & 1.00 & 1.00 & -- \\
+    Baseline & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.99 {\scriptsize [0.96, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    Low & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.98 {\scriptsize [0.95, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    Medium & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    High & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Cross-run agreement for ESPR artifacts: fraction of run pairs making the same include/omit decision per field, averaged over fields (mean [95\% bootstrap CI over runs]).}
+  \label{tab:espr_agreement}
+  \begin{tabular}{lccccc}
+    \toprule
+    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    \midrule
+    Baseline & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.97 {\scriptsize [0.93, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    Low & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.97 {\scriptsize [0.91, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    Medium & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
+    High & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -34,20 +50,183 @@
   \centering
   \caption{Required field inclusion rates (\%) for ESPR artifacts, averaged across all vagueness levels. Fields below 50\% are systematically excluded.}
   \label{tab:espr_field_inclusion}
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lccccc}
     \toprule
-    Required field & Claude & GPT-4o & Llama-3.1 & Qwen-2.5 \\
+    Required field & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
     \midrule
-    Clearname & 100\% & 100\% & 100\% & 100\% \\
-    Shortname & 100\% & 100\% & 100\% & 100\% \\
-    Batterymaterialidentifier & 100\% & 100\% & 100\% & 100\% \\
-    Batterymaterialmass & 100\% & 100\% & 100\% & 100\% \\
-    Batterymaterialname & 100\% & 100\% & 100\% & 100\% \\
-    Iscriticalrawmaterial & 100\% & 100\% & 100\% & 100\% \\
-    Hazardoussubstanceclass & 80\% & 100\% & 100\% & 100\% \\
-    Hazardoussubstanceconcentration & 75\% & 100\% & 100\% & 100\% \\
-    Hazardoussubstanceidentifier & 85\% & 100\% & 100\% & 100\% \\
-    Hazardoussubstancename & 100\% & 100\% & 100\% & 100\% \\
+    Clearname & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Shortname & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Batterymaterialidentifier & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Batterymaterialmass & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Batterymaterialname & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Iscriticalrawmaterial & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Hazardoussubstanceclass & 100\% & 100\% & 100\% & 98\% & 100\% \\
+    Hazardoussubstanceconcentration & 100\% & 100\% & 100\% & 98\% & 100\% \\
+    Hazardoussubstanceidentifier & 100\% & 100\% & 100\% & 98\% & 100\% \\
+    Hazardoussubstancename & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Pairwise vagueness-level comparisons of ESPR completeness (two-sided Mann-Whitney $U$, Holm-corrected within each model). Bold: $p_{\text{Holm}} < 0.05$.}
+  \label{tab:espr_significance}
+  \begin{tabular}{llccc}
+    \toprule
+    Model & Comparison & $n$ & Cliff's $\delta$ & $p_{\text{Holm}}$ \\
+    \midrule
+    Claude & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Claude & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
+    Claude & Baseline vs High & 20/20 & +0.00 & 1.000 \\
+    Claude & Low vs Medium & 20/20 & +0.00 & 1.000 \\
+    Claude & Low vs High & 20/20 & +0.00 & 1.000 \\
+    Claude & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    GPT-4o & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    GPT-4o & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
+    GPT-4o & Baseline vs High & 20/20 & +0.00 & 1.000 \\
+    GPT-4o & Low vs Medium & 20/20 & +0.00 & 1.000 \\
+    GPT-4o & Low vs High & 20/20 & +0.00 & 1.000 \\
+    GPT-4o & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    Llama-3.1 & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Llama-3.1 & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
+    Llama-3.1 & Baseline vs High & 20/20 & +0.00 & 1.000 \\
+    Llama-3.1 & Low vs Medium & 20/20 & +0.00 & 1.000 \\
+    Llama-3.1 & Low vs High & 20/20 & +0.00 & 1.000 \\
+    Llama-3.1 & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    Ministral-8B & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Ministral-8B & Baseline vs Medium & 20/20 & -0.05 & 1.000 \\
+    Ministral-8B & Baseline vs High & 20/20 & -0.05 & 1.000 \\
+    Ministral-8B & Low vs Medium & 20/20 & -0.05 & 1.000 \\
+    Ministral-8B & Low vs High & 20/20 & -0.05 & 1.000 \\
+    Ministral-8B & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    Qwen-2.5 & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Qwen-2.5 & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
+    Qwen-2.5 & Baseline vs High & 20/20 & +0.00 & 1.000 \\
+    Qwen-2.5 & Low vs Medium & 20/20 & +0.00 & 1.000 \\
+    Qwen-2.5 & Low vs High & 20/20 & +0.00 & 1.000 \\
+    Qwen-2.5 & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Mean regulatory compliance (completeness) scores for GDPR artifacts by model and vagueness level (mean [95\% bootstrap CI over runs]).}
+  \label{tab:gdpr_completeness}
+  \begin{tabular}{lccccc}
+    \toprule
+    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    \midrule
+    Baseline & 0.97 {\scriptsize [0.92, 1.00]} & 0.68 {\scriptsize [0.65, 0.72]} & 0.66 {\scriptsize [0.62, 0.70]} & 0.92 {\scriptsize [0.91, 0.93]} & 0.66 {\scriptsize [0.62, 0.69]} \\
+    Low & 0.94 {\scriptsize [0.88, 0.99]} & 0.71 {\scriptsize [0.68, 0.74]} & 0.55 {\scriptsize [0.50, 0.61]} & 0.90 {\scriptsize [0.87, 0.92]} & 0.63 {\scriptsize [0.58, 0.68]} \\
+    Medium & 0.94 {\scriptsize [0.91, 0.98]} & 0.81 {\scriptsize [0.78, 0.83]} & 0.79 {\scriptsize [0.76, 0.82]} & 0.95 {\scriptsize [0.94, 0.97]} & 0.84 {\scriptsize [0.82, 0.87]} \\
+    High & 0.93 {\scriptsize [0.89, 0.96]} & 0.93 {\scriptsize [0.92, 0.94]} & 0.92 {\scriptsize [0.90, 0.94]} & 0.96 {\scriptsize [0.95, 0.97]} & 0.93 {\scriptsize [0.92, 0.94]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Cross-run consistency scores for GDPR artifacts by model and vagueness level (mean [95\% bootstrap CI over runs]).}
+  \label{tab:gdpr_consistency}
+  \begin{tabular}{lccccc}
+    \toprule
+    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    \midrule
+    Baseline & 0.92 {\scriptsize [0.86, 0.97]} & 0.51 {\scriptsize [0.48, 0.54]} & 0.49 {\scriptsize [0.46, 0.52]} & 0.81 {\scriptsize [0.79, 0.83]} & 0.49 {\scriptsize [0.47, 0.52]} \\
+    Low & 0.90 {\scriptsize [0.84, 0.96]} & 0.57 {\scriptsize [0.55, 0.60]} & 0.43 {\scriptsize [0.39, 0.47]} & 0.80 {\scriptsize [0.77, 0.82]} & 0.47 {\scriptsize [0.43, 0.52]} \\
+    Medium & 0.91 {\scriptsize [0.86, 0.95]} & 0.58 {\scriptsize [0.56, 0.60]} & 0.57 {\scriptsize [0.55, 0.60]} & 0.83 {\scriptsize [0.82, 0.85]} & 0.62 {\scriptsize [0.61, 0.64]} \\
+    High & 0.91 {\scriptsize [0.85, 0.95]} & 0.77 {\scriptsize [0.76, 0.78]} & 0.77 {\scriptsize [0.76, 0.78]} & 0.88 {\scriptsize [0.87, 0.89]} & 0.78 {\scriptsize [0.76, 0.80]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Cross-run agreement for GDPR artifacts: fraction of run pairs making the same include/omit decision per field, averaged over fields (mean [95\% bootstrap CI over runs]).}
+  \label{tab:gdpr_agreement}
+  \begin{tabular}{lccccc}
+    \toprule
+    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    \midrule
+    Baseline & 0.88 {\scriptsize [0.81, 0.96]} & 0.81 {\scriptsize [0.79, 0.83]} & 0.81 {\scriptsize [0.79, 0.84]} & 0.90 {\scriptsize [0.88, 0.91]} & 0.81 {\scriptsize [0.79, 0.84]} \\
+    Low & 0.86 {\scriptsize [0.78, 0.94]} & 0.76 {\scriptsize [0.72, 0.79]} & 0.76 {\scriptsize [0.73, 0.79]} & 0.86 {\scriptsize [0.84, 0.88]} & 0.75 {\scriptsize [0.73, 0.77]} \\
+    Medium & 0.87 {\scriptsize [0.81, 0.94]} & 0.90 {\scriptsize [0.88, 0.91]} & 0.86 {\scriptsize [0.83, 0.88]} & 0.92 {\scriptsize [0.90, 0.94]} & 0.86 {\scriptsize [0.85, 0.88]} \\
+    High & 0.88 {\scriptsize [0.82, 0.95]} & 0.93 {\scriptsize [0.91, 0.96]} & 0.96 {\scriptsize [0.94, 0.98]} & 0.95 {\scriptsize [0.94, 0.96]} & 0.92 {\scriptsize [0.90, 0.94]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Required field inclusion rates (\%) for GDPR artifacts, averaged across all vagueness levels. Fields below 50\% are systematically excluded.}
+  \label{tab:gdpr_field_inclusion}
+  \begin{tabular}{lccccc}
+    \toprule
+    Required field & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    \midrule
+    Data minimisation & 89\% & 69\% & 62\% & 100\% & 66\% \\
+    Data subject rights & 91\% & 55\% & 61\% & 98\% & 56\% \\
+    Lawful basis (Art.~6) & 99\% & 80\% & 61\% & 100\% & 75\% \\
+    Necessity justification & 100\% & 99\% & 86\% & 98\% & 86\% \\
+    Proportionality & 96\% & 95\% & 79\% & 85\% & 78\% \\
+    Storage limitation & 95\% & 60\% & 36\% & 100\% & 52\% \\
+    Controllers \& processors & 100\% & 39\% & 64\% & 95\% & 59\% \\
+    Data subject categories & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Nature of processing & 100\% & 78\% & 82\% & 98\% & 76\% \\
+    Processing purposes & 98\% & 100\% & 96\% & 100\% & 94\% \\
+    Data categories & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Retention period & 100\% & 64\% & 52\% & 100\% & 69\% \\
+    Identified risks & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Residual risk & 89\% & 54\% & 48\% & 65\% & 49\% \\
+    Risk likelihood & 88\% & 86\% & 74\% & 99\% & 76\% \\
+    Risk severity & 100\% & 99\% & 98\% & 100\% & 98\% \\
+    Compliance mechanisms & 55\% & 20\% & 8\% & 36\% & 34\% \\
+    Organisational measures & 98\% & 90\% & 86\% & 100\% & 88\% \\
+    Technical measures & 100\% & 100\% & 96\% & 100\% & 100\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Pairwise vagueness-level comparisons of GDPR completeness (two-sided Mann-Whitney $U$, Holm-corrected within each model). Bold: $p_{\text{Holm}} < 0.05$.}
+  \label{tab:gdpr_significance}
+  \begin{tabular}{llccc}
+    \toprule
+    Model & Comparison & $n$ & Cliff's $\delta$ & $p_{\text{Holm}}$ \\
+    \midrule
+    Claude & Baseline vs Low & 20/20 & +0.14 & 0.613 \\
+    Claude & Baseline vs Medium & 20/20 & +0.34 & 0.124 \\
+    Claude & Baseline vs High & 20/20 & +0.56 & \textbf{0.006} \\
+    Claude & Low vs Medium & 20/20 & +0.20 & 0.613 \\
+    Claude & Low vs High & 20/20 & +0.41 & 0.086 \\
+    Claude & Medium vs High & 20/20 & +0.21 & 0.613 \\
+    GPT-4o & Baseline vs Low & 20/20 & -0.24 & 0.186 \\
+    GPT-4o & Baseline vs Medium & 20/20 & -0.71 & \textbf{$<$0.001} \\
+    GPT-4o & Baseline vs High & 20/20 & -0.98 & \textbf{$<$0.001} \\
+    GPT-4o & Low vs Medium & 20/20 & -0.73 & \textbf{$<$0.001} \\
+    GPT-4o & Low vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
+    GPT-4o & Medium vs High & 20/20 & -0.96 & \textbf{$<$0.001} \\
+    Llama-3.1 & Baseline vs Low & 20/20 & +0.53 & \textbf{0.004} \\
+    Llama-3.1 & Baseline vs Medium & 20/20 & -0.74 & \textbf{$<$0.001} \\
+    Llama-3.1 & Baseline vs High & 20/20 & -0.99 & \textbf{$<$0.001} \\
+    Llama-3.1 & Low vs Medium & 20/20 & -0.83 & \textbf{$<$0.001} \\
+    Llama-3.1 & Low vs High & 20/20 & -0.97 & \textbf{$<$0.001} \\
+    Llama-3.1 & Medium vs High & 20/20 & -0.87 & \textbf{$<$0.001} \\
+    Ministral-8B & Baseline vs Low & 20/20 & +0.19 & 0.562 \\
+    Ministral-8B & Baseline vs Medium & 20/20 & -0.51 & \textbf{0.011} \\
+    Ministral-8B & Baseline vs High & 20/20 & -0.67 & \textbf{$<$0.001} \\
+    Ministral-8B & Low vs Medium & 20/20 & -0.52 & \textbf{0.011} \\
+    Ministral-8B & Low vs High & 20/20 & -0.62 & \textbf{0.002} \\
+    Ministral-8B & Medium vs High & 20/20 & -0.15 & 0.562 \\
+    Qwen-2.5 & Baseline vs Low & 20/20 & +0.10 & 0.612 \\
+    Qwen-2.5 & Baseline vs Medium & 20/20 & -0.97 & \textbf{$<$0.001} \\
+    Qwen-2.5 & Baseline vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
+    Qwen-2.5 & Low vs Medium & 20/20 & -0.91 & \textbf{$<$0.001} \\
+    Qwen-2.5 & Low vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
+    Qwen-2.5 & Medium vs High & 20/20 & -0.80 & \textbf{$<$0.001} \\
     \bottomrule
   \end{tabular}
 \end{table}

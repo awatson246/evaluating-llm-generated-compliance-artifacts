@@ -1,0 +1,21 @@
+{
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "task": "gdpr",
+  "vagueness_level": "low",
+  "run_number": 8,
+  "timestamp": "2026-10-06T00:33:34.030920+00:00",
+  "raw_response": "```\n{\n  \"assessmentDate\": \"2023-12-01\",\n  \"organisationName\": \"Pan-European Parcel Logistics Operator\",\n  \"processingScenario\": {\n    \"description\": \"Deployment of AI-driven workforce management platform across 18 EU distribution and sorting centers\",\n    \"purpose\": \"Automate shift scheduling, generate real-time performance rankings, and produce automated underperformance flags\"\n  },\n  \"personalDataProcessed\": {\n    \"categories\": [\n      \"Location data (GPS)\",\n      \"Biometric data (entry and exit scans)\",\n      \"Task completion patterns\",\n      \"Performance rankings and underperformance flags\"\n    ],\n    \"sources\": [\n      \"GPS location tracks\",\n      \"Package-handling throughput\",\n      \"Biometric entry and exit scans\",\n      \"Task completion patterns\"\n    ]\n  },\n  \"dataSubjects\": {\n    \"number\": 12000,\n    \"categories\": [\n      \"Warehouse operatives\",\n      \"Delivery drivers\"\n    ]\n  },\n  \"dataRecipients\": {\n    \"categories\": [\n      \"HR departments\",\n      \"Employment decision-making bodies\"\n    ]\n  },\n  \"processingActivities\": {\n    \"automatedDecisionMaking\": {\n      \"description\": \"Shift scheduling, real-time performance rankings, and underperformance flags\",\n      \"logic\": \"AI-driven algorithms processing GPS location tracks, package-handling throughput, biometric entry and exit scans, and task completion patterns\"\n    },\n    \"profiling\": {\n      \"description\": \"Real-time performance rankings and underperformance flags\",\n      \"logic\": \"AI-driven algorithms processing GPS location tracks, package-handling throughput, biometric entry and exit scans, and task completion patterns\"\n    }\n  },\n  \"risksAssessed\": {\n    \"dataProtection\": [\n      \"Unauthorised access to biometric data\",\n      \"Inaccurate profiling and automated decision-making\"\n    ],\n    \"privacy\": [\n      \"Unauthorised sharing of performance rankings and underperformance flags\"\n    ],\n    \"security\": [\n      \"Data breaches due to system vulnerabilities\"\n    ],\n    \"reputational\": [\n      \"Negative impact on employee morale and job security\"\n    ]\n  },\n  \"mitigationMeasures\": {\n    \"technical\": [\n      \"Encryption of biometric data\",\n      \"Regular security audits and penetration testing\"\n    ],\n    \"organisational\": [\n      \"Training for HR personnel on data protection and employment law\",\n      \"Establishment of clear guidelines for automated decision-making\"\n    ],\n    \"procedural\": [\n      \"Regular review of automated decision-making logic\",\n      \"Transparency regarding data processing and purposes\"\n    ]\n  },\n  \"supervisoryAuthority\": \"Local Data Protection Authority (DPA) or European Data Protection Board (EDPB) as applicable\",\n  \"consultation\": \"Stakeholder consultation with employees, HR departments, and employment decision-making bodies\",\n  \"review\": {\n    \"frequency\": \"Annually\",\n    \"responsibility\": \"Data Protection Officer\"\n  }\n}\n```",
+  "usage": {
+    "input_tokens": 197,
+    "output_tokens": 616
+  },
+  "latency_seconds": 4.565,
+  "parsed_fields": {},
+  "served_model": "meta-llama/Llama-3.1-8B-Instruct via nscale",
+  "generation": {
+    "temperature": 0.7,
+    "max_tokens": 32000,
+    "requested_max_tokens": 32000
+  },
+  "prompt_sha256": "b11a3d838188c3bc4195694861530ef786d890a0642bc89910e4b45bc51752cf"
+}

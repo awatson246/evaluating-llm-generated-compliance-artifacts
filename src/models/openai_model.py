@@ -37,4 +37,5 @@ class OpenAIModel(BaseModel):
                 "total_tokens": response.usage.total_tokens,
             },
             latency_seconds=time.perf_counter() - t0,
+            served_model=response.model,
         )

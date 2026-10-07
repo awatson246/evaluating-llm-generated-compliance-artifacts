@@ -1,0 +1,71 @@
+model_id,task,comparison,level_a,level_b,n_a,n_b,statistic,p_value,p_holm,cliffs_delta
+claude-sonnet-4-6,espr,omnibus (Kruskal-Wallis),,,80,,,1.0,1.0,
+claude-sonnet-4-6,espr,baseline vs low,baseline,low,20,20.0,200.0,1.0,1.0,0.0
+claude-sonnet-4-6,espr,baseline vs medium,baseline,medium,20,20.0,200.0,1.0,1.0,0.0
+claude-sonnet-4-6,espr,baseline vs high,baseline,high,20,20.0,200.0,1.0,1.0,0.0
+claude-sonnet-4-6,espr,low vs medium,low,medium,20,20.0,200.0,1.0,1.0,0.0
+claude-sonnet-4-6,espr,low vs high,low,high,20,20.0,200.0,1.0,1.0,0.0
+claude-sonnet-4-6,espr,medium vs high,medium,high,20,20.0,200.0,1.0,1.0,0.0
+claude-sonnet-4-6,gdpr,omnibus (Kruskal-Wallis),,,80,,12.804046099960765,0.005080111849779689,0.005080111849779689,
+claude-sonnet-4-6,gdpr,baseline vs low,baseline,low,20,20.0,228.5,0.3000922866443314,0.6131047482416986,0.1425
+claude-sonnet-4-6,gdpr,baseline vs medium,baseline,medium,20,20.0,268.0,0.03112245063582967,0.12448980254331868,0.34
+claude-sonnet-4-6,gdpr,baseline vs high,baseline,high,20,20.0,311.5,0.000921863079603383,0.005531178477620298,0.5575
+claude-sonnet-4-6,gdpr,low vs medium,low,medium,20,20.0,239.0,0.24105536130306537,0.6131047482416986,0.195
+claude-sonnet-4-6,gdpr,low vs high,low,high,20,20.0,281.5,0.01714196028621866,0.0857098014310933,0.4075
+claude-sonnet-4-6,gdpr,medium vs high,medium,high,20,20.0,243.0,0.20436824941389953,0.6131047482416986,0.215
+gpt-4o,espr,omnibus (Kruskal-Wallis),,,80,,,1.0,1.0,
+gpt-4o,espr,baseline vs low,baseline,low,20,20.0,200.0,1.0,1.0,0.0
+gpt-4o,espr,baseline vs medium,baseline,medium,20,20.0,200.0,1.0,1.0,0.0
+gpt-4o,espr,baseline vs high,baseline,high,20,20.0,200.0,1.0,1.0,0.0
+gpt-4o,espr,low vs medium,low,medium,20,20.0,200.0,1.0,1.0,0.0
+gpt-4o,espr,low vs high,low,high,20,20.0,200.0,1.0,1.0,0.0
+gpt-4o,espr,medium vs high,medium,high,20,20.0,200.0,1.0,1.0,0.0
+gpt-4o,gdpr,omnibus (Kruskal-Wallis),,,80,,55.9927788130734,4.215868446701597e-12,4.215868446701597e-12,
+gpt-4o,gdpr,baseline vs low,baseline,low,20,20.0,151.5,0.18565692393811983,0.18565692393811983,-0.2425
+gpt-4o,gdpr,baseline vs medium,baseline,medium,20,20.0,57.0,8.942750147858442e-05,0.00017885500295716883,-0.715
+gpt-4o,gdpr,baseline vs high,baseline,high,20,20.0,4.0,5.6705311126370666e-08,2.8352655563185333e-07,-0.98
+gpt-4o,gdpr,low vs medium,low,medium,20,20.0,53.5,5.382298052862083e-05,0.00016146894158586248,-0.7325
+gpt-4o,gdpr,low vs high,low,high,20,20.0,0.5,3.229003716489465e-08,1.937402229893679e-07,-0.9975
+gpt-4o,gdpr,medium vs high,medium,high,20,20.0,8.0,8.44190511816483e-08,3.376762047265932e-07,-0.96
+meta-llama/Llama-3.1-8B-Instruct,espr,omnibus (Kruskal-Wallis),,,80,,,1.0,1.0,
+meta-llama/Llama-3.1-8B-Instruct,espr,baseline vs low,baseline,low,20,20.0,200.0,1.0,1.0,0.0
+meta-llama/Llama-3.1-8B-Instruct,espr,baseline vs medium,baseline,medium,20,20.0,200.0,1.0,1.0,0.0
+meta-llama/Llama-3.1-8B-Instruct,espr,baseline vs high,baseline,high,20,20.0,200.0,1.0,1.0,0.0
+meta-llama/Llama-3.1-8B-Instruct,espr,low vs medium,low,medium,20,20.0,200.0,1.0,1.0,0.0
+meta-llama/Llama-3.1-8B-Instruct,espr,low vs high,low,high,20,20.0,200.0,1.0,1.0,0.0
+meta-llama/Llama-3.1-8B-Instruct,espr,medium vs high,medium,high,20,20.0,200.0,1.0,1.0,0.0
+meta-llama/Llama-3.1-8B-Instruct,gdpr,omnibus (Kruskal-Wallis),,,80,,57.94632459452405,1.6139060438777153e-12,1.6139060438777153e-12,
+meta-llama/Llama-3.1-8B-Instruct,gdpr,baseline vs low,baseline,low,20,20.0,305.5,0.004051011793937858,0.004051011793937858,0.5275
+meta-llama/Llama-3.1-8B-Instruct,gdpr,baseline vs medium,baseline,medium,20,20.0,52.0,5.265054115905003e-05,0.00010530108231810006,-0.74
+meta-llama/Llama-3.1-8B-Instruct,gdpr,baseline vs high,baseline,high,20,20.0,2.0,4.670875039205132e-08,2.8025250235230796e-07,-0.99
+meta-llama/Llama-3.1-8B-Instruct,gdpr,low vs medium,low,medium,20,20.0,33.0,5.603135975131561e-06,1.6809407925394684e-05,-0.835
+meta-llama/Llama-3.1-8B-Instruct,gdpr,low vs high,low,high,20,20.0,5.0,7.663260933180366e-08,3.831630466590183e-07,-0.975
+meta-llama/Llama-3.1-8B-Instruct,gdpr,medium vs high,medium,high,20,20.0,26.0,1.385753362463332e-06,5.543013449853328e-06,-0.87
+ministral-8b-2512,espr,omnibus (Kruskal-Wallis),,,80,,2.025641025641084,0.567101906515092,0.567101906515092,
+ministral-8b-2512,espr,baseline vs low,baseline,low,20,20.0,200.0,1.0,1.0,0.0
+ministral-8b-2512,espr,baseline vs medium,baseline,medium,20,20.0,190.0,0.34211225261696365,1.0,-0.05
+ministral-8b-2512,espr,baseline vs high,baseline,high,20,20.0,190.0,0.34211225261696365,1.0,-0.05
+ministral-8b-2512,espr,low vs medium,low,medium,20,20.0,190.0,0.34211225261696365,1.0,-0.05
+ministral-8b-2512,espr,low vs high,low,high,20,20.0,190.0,0.34211225261696365,1.0,-0.05
+ministral-8b-2512,espr,medium vs high,medium,high,20,20.0,200.0,1.0,1.0,0.0
+ministral-8b-2512,gdpr,omnibus (Kruskal-Wallis),,,80,,23.961133523499043,2.5451071430035214e-05,2.5451071430035214e-05,
+ministral-8b-2512,gdpr,baseline vs low,baseline,low,20,20.0,238.0,0.28108824618679507,0.5621764923735901,0.19
+ministral-8b-2512,gdpr,baseline vs medium,baseline,medium,20,20.0,98.5,0.002828130853838337,0.011312523415353349,-0.5075
+ministral-8b-2512,gdpr,baseline vs high,baseline,high,20,20.0,66.0,6.90543190712033e-05,0.0004143259144272198,-0.67
+ministral-8b-2512,gdpr,low vs medium,low,medium,20,20.0,96.5,0.003189263188091276,0.011312523415353349,-0.5175
+ministral-8b-2512,gdpr,low vs high,low,high,20,20.0,76.0,0.00032096256116747126,0.0016048128058373562,-0.62
+ministral-8b-2512,gdpr,medium vs high,medium,high,20,20.0,169.0,0.325668995668133,0.5621764923735901,-0.155
+Qwen/Qwen2.5-7B-Instruct,espr,omnibus (Kruskal-Wallis),,,80,,,1.0,1.0,
+Qwen/Qwen2.5-7B-Instruct,espr,baseline vs low,baseline,low,20,20.0,200.0,1.0,1.0,0.0
+Qwen/Qwen2.5-7B-Instruct,espr,baseline vs medium,baseline,medium,20,20.0,200.0,1.0,1.0,0.0
+Qwen/Qwen2.5-7B-Instruct,espr,baseline vs high,baseline,high,20,20.0,200.0,1.0,1.0,0.0
+Qwen/Qwen2.5-7B-Instruct,espr,low vs medium,low,medium,20,20.0,200.0,1.0,1.0,0.0
+Qwen/Qwen2.5-7B-Instruct,espr,low vs high,low,high,20,20.0,200.0,1.0,1.0,0.0
+Qwen/Qwen2.5-7B-Instruct,espr,medium vs high,medium,high,20,20.0,200.0,1.0,1.0,0.0
+Qwen/Qwen2.5-7B-Instruct,gdpr,omnibus (Kruskal-Wallis),,,80,,61.972743005994886,2.2267725235183762e-13,2.2267725235183762e-13,
+Qwen/Qwen2.5-7B-Instruct,gdpr,baseline vs low,baseline,low,20,20.0,219.0,0.6122682517785607,0.6122682517785607,0.095
+Qwen/Qwen2.5-7B-Instruct,gdpr,baseline vs medium,baseline,medium,20,20.0,6.5,1.2586931355442237e-07,5.034772542176895e-07,-0.9675
+Qwen/Qwen2.5-7B-Instruct,gdpr,baseline vs high,baseline,high,20,20.0,0.0,3.451562103310926e-08,2.0709372619865554e-07,-1.0
+Qwen/Qwen2.5-7B-Instruct,gdpr,low vs medium,low,medium,20,20.0,18.5,7.075711533527277e-07,2.122713460058183e-06,-0.9075
+Qwen/Qwen2.5-7B-Instruct,gdpr,low vs high,low,high,20,20.0,0.5,3.926423317039315e-08,2.0709372619865554e-07,-0.9975
+Qwen/Qwen2.5-7B-Instruct,gdpr,medium vs high,medium,high,20,20.0,40.0,7.031993898248797e-06,1.4063987796497593e-05,-0.8

@@ -24,8 +24,12 @@ class HuggingFaceModel(BaseModel):
     def __init__(self, model_id: str, api_key: str, **kwargs):
         super().__init__(model_id, api_key, **kwargs)
 
-        self._client = AsyncInferenceClient(api_key=api_key)
-        self._context_limit = HF_CONTEXT_LIMITS.get(
+        # hf_provider pins one inference backend (e.g. "nscale"). Backends can
+        # differ in context window and quantization, so all of a model's runs
+        # should go through the same one. Default "auto" lets HF choose.
+        self.hf_provider: str = kwargs.get("hf_provider", "auto")
+        self._client = AsyncInferenceClient(api_key=api_key, provider=self.hf_provider)
+        self._context_limit = kwargs.get("context_limit") or HF_CONTEXT_LIMITS.get(
             model_id,
             DEFAULT_CONTEXT_LIMIT,
         )
@@ -66,7 +70,9 @@ class HuggingFaceModel(BaseModel):
 
         t0 = time.perf_counter()
 
-        result = await self._client.chat_completion(
+        # Streamed: backends time out non-streaming requests after ~60s, which
+        # silently drops exactly the longest generations (selection bias).
+        stream = await self._client.chat_completion(
             model=self.model_id,
             messages=[
                 {
@@ -79,14 +85,25 @@ class HuggingFaceModel(BaseModel):
                 "temperature",
                 self.temperature,
             ),
+            stream=True,
+            stream_options={"include_usage": True},
         )
 
+        parts: list[str] = []
+        usage = None
+        served = None
+        async for chunk in stream:
+            served = served or getattr(chunk, "model", None)
+            if chunk.choices and chunk.choices[0].delta.content:
+                parts.append(chunk.choices[0].delta.content)
+            if getattr(chunk, "usage", None):
+                usage = chunk.usage
+
         latency = time.perf_counter() - t0
-        usage = result.usage
 
         return ModelResponse(
             model_id=self.model_id,
-            raw_text=result.choices[0].message.content,
+            raw_text="".join(parts),
             usage={
                 "input_tokens": (
                     usage.prompt_tokens if usage else 0
@@ -96,4 +113,5 @@ class HuggingFaceModel(BaseModel):
                 ),
             },
             latency_seconds=latency,
+            served_model=f"{served or self.model_id} via {self.hf_provider}",
         )

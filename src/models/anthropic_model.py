@@ -31,4 +31,5 @@ class AnthropicModel(BaseModel):
                 "output_tokens": response.usage.output_tokens,
             },
             latency_seconds=time.perf_counter() - t0,
+            served_model=response.model,
         )

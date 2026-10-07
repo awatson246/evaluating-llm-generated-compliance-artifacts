@@ -121,7 +121,8 @@ def save_raw(record: dict) -> None:
 
 # Transient errors worth retrying with backoff: rate limits and provider outages.
 _RATE_LIMIT_SIGNALS = ("429", "rate_limit", "rate limit", "ratelimit", "too many requests",
-                       "502", "503", "504", "service unavailable", "bad gateway", "overloaded")
+                       "500", "502", "503", "504", "internal server error", "service unavailable",
+                       "bad gateway", "overloaded")
 
 # Out-of-credit errors. Checked before rate limits because OpenAI reports
 # insufficient_quota as a 429, and retrying those only burns time.
@@ -155,6 +156,7 @@ async def run_one(
     exhausted: set[str],
     max_retries: int = 3,
     base_delay: float = 60.0,
+    call_timeout: float = 1800.0,
 ) -> dict:
     prompt     = load_prompt(task, level)
     max_tokens = model.effective_max_tokens(prompt)
@@ -166,7 +168,18 @@ async def run_one(
             log.info("START  %-40s  task=%-5s  level=%-6s  run=%d  (attempt %d)",
                      model.model_id, task, level, run_num, attempt + 1)
             try:
-                resp = await model.generate(prompt, max_tokens=max_tokens)
+                # A stalled connection otherwise holds its semaphore slot forever;
+                # five of them deadlock the whole batch. The limit sits well above
+                # the slowest genuine generation so long outputs are not dropped.
+                resp = await asyncio.wait_for(model.generate(prompt, max_tokens=max_tokens),
+                                              timeout=call_timeout)
+            except asyncio.TimeoutError:
+                if attempt >= max_retries:
+                    raise RuntimeError(f"no response after {call_timeout:.0f}s "
+                                       f"({max_retries + 1} attempts)")
+                log.warning("TIMEOUT %s task=%s level=%s run=%d after %.0fs — retrying",
+                            model.model_id, task, level, run_num, call_timeout)
+                continue
             except Exception as exc:
                 if _is_quota(exc):
                     if provider not in exhausted:
@@ -198,6 +211,7 @@ async def run_one(
         "usage":           resp.usage,
         "latency_seconds": round(resp.latency_seconds, 3),
         "parsed_fields":   {},
+        "served_model":    resp.served_model,
         # Provenance: lets runs collected in different batches be checked for
         # identical generation settings and prompt text before being pooled.
         "generation": {
@@ -259,6 +273,7 @@ async def run_experiment(config: dict, force_dry_run: bool = False, task_filter:
     retry_cfg   = config.get("retry", {})
     max_retries = retry_cfg.get("max_retries", 3)
     base_delay  = retry_cfg.get("base_delay_seconds", 60.0)
+    call_timeout = config.get("call_timeout_seconds", 1800)
 
     gen_cfg     = config.get("generation", {})
     keys        = config["api_keys"]
@@ -276,7 +291,7 @@ async def run_experiment(config: dict, force_dry_run: bool = False, task_filter:
                 return
         try:
             record = await run_one(model_cache[(provider, model_id)], provider, task, level,
-                                   run, sem, exhausted, max_retries, base_delay)
+                                   run, sem, exhausted, max_retries, base_delay, call_timeout)
         except QuotaExhausted:
             counts["quota"] += 1
         except Exception as exc:
@@ -287,10 +302,16 @@ async def run_experiment(config: dict, force_dry_run: bool = False, task_filter:
             save_raw(record)
             counts["ok"] += 1
 
+    # Per-model options from config (e.g. hf_provider, context_limit) beyond provider/model_id
+    model_opts = {
+        (m["provider"], m["model_id"]): {k: v for k, v in m.items() if k not in ("provider", "model_id")}
+        for m in config["models"]
+    }
     for provider, model_id, *_ in pending:
         key = (provider, model_id)
         if key not in model_cache:
-            model_cache[key] = build_model(provider, model_id, api_key=keys[provider], **gen_cfg)
+            model_cache[key] = build_model(provider, model_id, api_key=keys[provider],
+                                           **{**gen_cfg, **model_opts.get(key, {})})
 
     await asyncio.gather(*(run_and_save(*c) for c in pending))
 

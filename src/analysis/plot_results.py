@@ -61,6 +61,7 @@ MODEL_SHORT: dict[str, str] = {
     "claude-sonnet-4-6":         "Claude",
     "Llama-3.1-8B-Instruct":    "Llama-3.1",
     "open-mistral-7b":            "Mistral-7B",
+    "ministral-8b-2512":                   "Ministral-8B",
     "Qwen2.5-7B-Instruct":      "Qwen-2.5",
 }
 
