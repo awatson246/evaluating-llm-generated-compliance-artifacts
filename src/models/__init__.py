@@ -25,5 +25,6 @@ __all__ = [
     "OpenAIModel",
     "AnthropicModel",
     "HuggingFaceModel",
+    "MistralModel",
     "build_model",
 ]

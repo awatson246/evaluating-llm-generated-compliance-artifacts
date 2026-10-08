@@ -2,7 +2,7 @@
 Main orchestrator for the LLM compliance artifact evaluation experiment.
 
 Usage:
-    cd research_pipeline
+    cd src
     python run_experiment.py               # follow config.yaml settings
     python run_experiment.py --dry-run     # override: single condition, no schema needed
     python run_experiment.py --config path/to/other_config.yaml

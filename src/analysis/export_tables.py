@@ -23,6 +23,10 @@ from pathlib import Path
 
 import pandas as pd
 
+import sys
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from analysis.labels import field_label, model_label  # noqa: E402
+
 log = logging.getLogger(__name__)
 
 OUTPUTS_DIR    = Path(__file__).parent.parent / "outputs"
@@ -35,66 +39,13 @@ VAGUENESS_ORDER  = ["baseline", "low", "medium", "high"]
 VAGUENESS_LABELS = {"baseline": "Baseline", "low": "Low",
                     "medium": "Medium",   "high": "High"}
 
-# Display names for models (last path segment → short label)
-MODEL_SHORT: dict[str, str] = {
-    "gpt-4o":                               "GPT-4o",
-    "claude-sonnet-4-6":                    "Claude",
-    "Llama-3.1-8B-Instruct":               "Llama-3.1",
-    "open-mistral-7b":                     "Mistral-7B",
-    "ministral-8b-2512":                   "Ministral-8B",
-    "Qwen2.5-7B-Instruct":                 "Qwen-2.5",
-}
-
-# Human-readable field labels for the inclusion table
-FIELD_LABELS: dict[str, str] = {
-    "processing_description.nature":                           "Nature of processing",
-    "processing_description.scope.data_categories":           "Data categories",
-    "processing_description.scope.retention_period":          "Retention period",
-    "processing_description.purposes.stated_purposes":        "Processing purposes",
-    "processing_description.data_subjects.categories":        "Data subject categories",
-    "processing_description.actors":                          "Controllers \\& processors",
-    "necessity_proportionality.lawful_basis":                 "Lawful basis (Art.~6)",
-    "necessity_proportionality.necessity_justification":      "Necessity justification",
-    "necessity_proportionality.proportionality_justification":"Proportionality",
-    "necessity_proportionality.data_minimisation":            "Data minimisation",
-    "necessity_proportionality.storage_limitation":           "Storage limitation",
-    "necessity_proportionality.data_subject_rights":          "Data subject rights",
-    "risk_assessment.identified_risks":                       "Identified risks",
-    "risk_assessment.risk_likelihood":                        "Risk likelihood",
-    "risk_assessment.risk_severity":                          "Risk severity",
-    "risk_assessment.residual_risk":                          "Residual risk",
-    "risk_mitigation.technical_measures":                     "Technical measures",
-    "risk_mitigation.organisational_measures":                "Organisational measures",
-    "risk_mitigation.compliance_mechanisms":                  "Compliance mechanisms",
-    # AAS fields
-    "product_identification.manufacturer":   "Manufacturer",
-    "product_identification.brand":          "Brand",
-    "product_identification.model":          "Model designation",
-    "product_identification.country_of_origin": "Country of origin",
-    "product_classification.product_category": "Product category",
-    "material_composition.materials":        "Materials list",
-    "material_composition.recycled_content": "Recycled content \\%",
-    "material_composition.substances_of_concern": "SVHC declaration",
-    "material_composition.hazardous_materials": "Hazardous materials",
-    "carbon_footprint.lifecycle_co2":        "Lifecycle CO\\textsubscript{2}",
-    "carbon_footprint.methodology":          "Calculation methodology",
-    "circularity.repairability_score":       "Repairability score",
-    "circularity.recyclability_rate":        "Recyclability rate",
-    "circularity.spare_parts_availability":  "Spare parts availability",
-    "circularity.end_of_life_instructions":  "End-of-life instructions",
-    "compliance.ce_marking":                 "CE marking",
-    "compliance.eu_declarations":            "EU declaration of conformity",
-    "compliance.reach_compliance":           "REACH compliance",
-}
-
 
 def _short_model(model_id: str) -> str:
-    base = model_id.split("/")[-1]
-    return MODEL_SHORT.get(base, MODEL_SHORT.get(model_id, base))
+    return model_label(model_id)
 
 
 def _field_label(fid: str) -> str:
-    return FIELD_LABELS.get(fid, fid.split(".")[-1].replace("_", " ").title())
+    return field_label(fid, latex=True)
 
 
 # ── LaTeX helpers ─────────────────────────────────────────────────────────────

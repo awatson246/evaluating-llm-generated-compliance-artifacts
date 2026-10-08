@@ -15,8 +15,14 @@ models:
   - provider: huggingface
     # Requires accepting the Meta license at huggingface.co/meta-llama/Llama-3.1-8B-Instruct
     model_id: meta-llama/Llama-3.1-8B-Instruct
+    # Pinned: the default backend (novita) rejects the ESPR-high prompt; nscale
+    # serves the full 128k context. Keep all Llama runs on one backend.
+    hf_provider: nscale
+    context_limit: 131072
+  # Mistral API. open-mistral-7b is retired and silently redirected to
+  # ministral-8b, so request the dated model explicitly.
   - provider: mistral
-    model_id: open-mistral-7b
+    model_id: ministral-8b-2512
   - provider: huggingface
     model_id: Qwen/Qwen2.5-7B-Instruct
 

@@ -1,11 +1,8 @@
 # API keys — NEVER commit this
 src/config.yaml
 
-# Experiment outputs (tracked by directory via .gitkeep, not by content)
-#src/outputs/raw/*.json
-#src/outputs/scored/*.json
-#src/outputs/aggregate_summary.csv
-#src/outputs/latex_tables.tex
+# Lock held while run_experiment.py is running
+src/outputs/raw/.run_experiment.lock
 
 # Python
 __pycache__/

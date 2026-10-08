@@ -4,7 +4,7 @@
   \label{tab:espr_completeness}
   \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Vagueness & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
     Baseline & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.99 {\scriptsize [0.97, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
     Low & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.99 {\scriptsize [0.97, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
@@ -20,7 +20,7 @@
   \label{tab:espr_consistency}
   \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Vagueness & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
     Baseline & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.99 {\scriptsize [0.96, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
     Low & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.98 {\scriptsize [0.95, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
@@ -36,7 +36,7 @@
   \label{tab:espr_agreement}
   \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Vagueness & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
     Baseline & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.97 {\scriptsize [0.93, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
     Low & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} & 0.97 {\scriptsize [0.91, 1.00]} & 1.00 {\scriptsize [1.00, 1.00]} \\
@@ -52,18 +52,18 @@
   \label{tab:espr_field_inclusion}
   \begin{tabular}{lccccc}
     \toprule
-    Required field & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Required field & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
-    Clearname & 100\% & 100\% & 100\% & 100\% & 100\% \\
-    Shortname & 100\% & 100\% & 100\% & 100\% & 100\% \\
-    Batterymaterialidentifier & 100\% & 100\% & 100\% & 100\% & 100\% \\
-    Batterymaterialmass & 100\% & 100\% & 100\% & 100\% & 100\% \\
-    Batterymaterialname & 100\% & 100\% & 100\% & 100\% & 100\% \\
-    Iscriticalrawmaterial & 100\% & 100\% & 100\% & 100\% & 100\% \\
-    Hazardoussubstanceclass & 100\% & 100\% & 100\% & 98\% & 100\% \\
-    Hazardoussubstanceconcentration & 100\% & 100\% & 100\% & 98\% & 100\% \\
-    Hazardoussubstanceidentifier & 100\% & 100\% & 100\% & 98\% & 100\% \\
-    Hazardoussubstancename & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Battery chemistry (full name) & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Battery chemistry (short name) & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Material identifier & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Material mass & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Material name & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Critical raw material & 100\% & 100\% & 100\% & 100\% & 100\% \\
+    Hazardous substance class & 100\% & 100\% & 100\% & 98\% & 100\% \\
+    Hazardous substance concentration & 100\% & 100\% & 100\% & 98\% & 100\% \\
+    Hazardous substance identifier & 100\% & 100\% & 100\% & 98\% & 100\% \\
+    Hazardous substance name & 100\% & 100\% & 100\% & 100\% & 100\% \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -76,36 +76,36 @@
     \toprule
     Model & Comparison & $n$ & Cliff's $\delta$ & $p_{\text{Holm}}$ \\
     \midrule
-    Claude & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
-    Claude & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
-    Claude & Baseline vs High & 20/20 & +0.00 & 1.000 \\
-    Claude & Low vs Medium & 20/20 & +0.00 & 1.000 \\
-    Claude & Low vs High & 20/20 & +0.00 & 1.000 \\
-    Claude & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    Claude Sonnet 4.6 & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Claude Sonnet 4.6 & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
+    Claude Sonnet 4.6 & Baseline vs High & 20/20 & +0.00 & 1.000 \\
+    Claude Sonnet 4.6 & Low vs Medium & 20/20 & +0.00 & 1.000 \\
+    Claude Sonnet 4.6 & Low vs High & 20/20 & +0.00 & 1.000 \\
+    Claude Sonnet 4.6 & Medium vs High & 20/20 & +0.00 & 1.000 \\
     GPT-4o & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
     GPT-4o & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
     GPT-4o & Baseline vs High & 20/20 & +0.00 & 1.000 \\
     GPT-4o & Low vs Medium & 20/20 & +0.00 & 1.000 \\
     GPT-4o & Low vs High & 20/20 & +0.00 & 1.000 \\
     GPT-4o & Medium vs High & 20/20 & +0.00 & 1.000 \\
-    Llama-3.1 & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
-    Llama-3.1 & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
-    Llama-3.1 & Baseline vs High & 20/20 & +0.00 & 1.000 \\
-    Llama-3.1 & Low vs Medium & 20/20 & +0.00 & 1.000 \\
-    Llama-3.1 & Low vs High & 20/20 & +0.00 & 1.000 \\
-    Llama-3.1 & Medium vs High & 20/20 & +0.00 & 1.000 \\
-    Ministral-8B & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
-    Ministral-8B & Baseline vs Medium & 20/20 & -0.05 & 1.000 \\
-    Ministral-8B & Baseline vs High & 20/20 & -0.05 & 1.000 \\
-    Ministral-8B & Low vs Medium & 20/20 & -0.05 & 1.000 \\
-    Ministral-8B & Low vs High & 20/20 & -0.05 & 1.000 \\
-    Ministral-8B & Medium vs High & 20/20 & +0.00 & 1.000 \\
-    Qwen-2.5 & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
-    Qwen-2.5 & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
-    Qwen-2.5 & Baseline vs High & 20/20 & +0.00 & 1.000 \\
-    Qwen-2.5 & Low vs Medium & 20/20 & +0.00 & 1.000 \\
-    Qwen-2.5 & Low vs High & 20/20 & +0.00 & 1.000 \\
-    Qwen-2.5 & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    Llama 3.1 8B & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Llama 3.1 8B & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
+    Llama 3.1 8B & Baseline vs High & 20/20 & +0.00 & 1.000 \\
+    Llama 3.1 8B & Low vs Medium & 20/20 & +0.00 & 1.000 \\
+    Llama 3.1 8B & Low vs High & 20/20 & +0.00 & 1.000 \\
+    Llama 3.1 8B & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    Ministral 8B & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Ministral 8B & Baseline vs Medium & 20/20 & -0.05 & 1.000 \\
+    Ministral 8B & Baseline vs High & 20/20 & -0.05 & 1.000 \\
+    Ministral 8B & Low vs Medium & 20/20 & -0.05 & 1.000 \\
+    Ministral 8B & Low vs High & 20/20 & -0.05 & 1.000 \\
+    Ministral 8B & Medium vs High & 20/20 & +0.00 & 1.000 \\
+    Qwen 2.5 7B & Baseline vs Low & 20/20 & +0.00 & 1.000 \\
+    Qwen 2.5 7B & Baseline vs Medium & 20/20 & +0.00 & 1.000 \\
+    Qwen 2.5 7B & Baseline vs High & 20/20 & +0.00 & 1.000 \\
+    Qwen 2.5 7B & Low vs Medium & 20/20 & +0.00 & 1.000 \\
+    Qwen 2.5 7B & Low vs High & 20/20 & +0.00 & 1.000 \\
+    Qwen 2.5 7B & Medium vs High & 20/20 & +0.00 & 1.000 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -116,7 +116,7 @@
   \label{tab:gdpr_completeness}
   \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Vagueness & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
     Baseline & 0.97 {\scriptsize [0.92, 1.00]} & 0.68 {\scriptsize [0.65, 0.72]} & 0.66 {\scriptsize [0.62, 0.70]} & 0.92 {\scriptsize [0.91, 0.93]} & 0.66 {\scriptsize [0.62, 0.69]} \\
     Low & 0.94 {\scriptsize [0.88, 0.99]} & 0.71 {\scriptsize [0.68, 0.74]} & 0.55 {\scriptsize [0.50, 0.61]} & 0.90 {\scriptsize [0.87, 0.92]} & 0.63 {\scriptsize [0.58, 0.68]} \\
@@ -132,7 +132,7 @@
   \label{tab:gdpr_consistency}
   \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Vagueness & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
     Baseline & 0.92 {\scriptsize [0.86, 0.97]} & 0.51 {\scriptsize [0.48, 0.54]} & 0.49 {\scriptsize [0.46, 0.52]} & 0.81 {\scriptsize [0.79, 0.83]} & 0.49 {\scriptsize [0.47, 0.52]} \\
     Low & 0.90 {\scriptsize [0.84, 0.96]} & 0.57 {\scriptsize [0.55, 0.60]} & 0.43 {\scriptsize [0.39, 0.47]} & 0.80 {\scriptsize [0.77, 0.82]} & 0.47 {\scriptsize [0.43, 0.52]} \\
@@ -148,7 +148,7 @@
   \label{tab:gdpr_agreement}
   \begin{tabular}{lccccc}
     \toprule
-    Vagueness & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Vagueness & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
     Baseline & 0.88 {\scriptsize [0.81, 0.96]} & 0.81 {\scriptsize [0.79, 0.83]} & 0.81 {\scriptsize [0.79, 0.84]} & 0.90 {\scriptsize [0.88, 0.91]} & 0.81 {\scriptsize [0.79, 0.84]} \\
     Low & 0.86 {\scriptsize [0.78, 0.94]} & 0.76 {\scriptsize [0.72, 0.79]} & 0.76 {\scriptsize [0.73, 0.79]} & 0.86 {\scriptsize [0.84, 0.88]} & 0.75 {\scriptsize [0.73, 0.77]} \\
@@ -164,11 +164,11 @@
   \label{tab:gdpr_field_inclusion}
   \begin{tabular}{lccccc}
     \toprule
-    Required field & Claude & GPT-4o & Llama-3.1 & Ministral-8B & Qwen-2.5 \\
+    Required field & Claude Sonnet 4.6 & GPT-4o & Llama 3.1 8B & Ministral 8B & Qwen 2.5 7B \\
     \midrule
     Data minimisation & 89\% & 69\% & 62\% & 100\% & 66\% \\
     Data subject rights & 91\% & 55\% & 61\% & 98\% & 56\% \\
-    Lawful basis (Art.~6) & 99\% & 80\% & 61\% & 100\% & 75\% \\
+    Lawful basis (Art. 6) & 99\% & 80\% & 61\% & 100\% & 75\% \\
     Necessity justification & 100\% & 99\% & 86\% & 98\% & 86\% \\
     Proportionality & 96\% & 95\% & 79\% & 85\% & 78\% \\
     Storage limitation & 95\% & 60\% & 36\% & 100\% & 52\% \\
@@ -197,36 +197,36 @@
     \toprule
     Model & Comparison & $n$ & Cliff's $\delta$ & $p_{\text{Holm}}$ \\
     \midrule
-    Claude & Baseline vs Low & 20/20 & +0.14 & 0.613 \\
-    Claude & Baseline vs Medium & 20/20 & +0.34 & 0.124 \\
-    Claude & Baseline vs High & 20/20 & +0.56 & \textbf{0.006} \\
-    Claude & Low vs Medium & 20/20 & +0.20 & 0.613 \\
-    Claude & Low vs High & 20/20 & +0.41 & 0.086 \\
-    Claude & Medium vs High & 20/20 & +0.21 & 0.613 \\
+    Claude Sonnet 4.6 & Baseline vs Low & 20/20 & +0.14 & 0.613 \\
+    Claude Sonnet 4.6 & Baseline vs Medium & 20/20 & +0.34 & 0.124 \\
+    Claude Sonnet 4.6 & Baseline vs High & 20/20 & +0.56 & \textbf{0.006} \\
+    Claude Sonnet 4.6 & Low vs Medium & 20/20 & +0.20 & 0.613 \\
+    Claude Sonnet 4.6 & Low vs High & 20/20 & +0.41 & 0.086 \\
+    Claude Sonnet 4.6 & Medium vs High & 20/20 & +0.21 & 0.613 \\
     GPT-4o & Baseline vs Low & 20/20 & -0.24 & 0.186 \\
     GPT-4o & Baseline vs Medium & 20/20 & -0.71 & \textbf{$<$0.001} \\
     GPT-4o & Baseline vs High & 20/20 & -0.98 & \textbf{$<$0.001} \\
     GPT-4o & Low vs Medium & 20/20 & -0.73 & \textbf{$<$0.001} \\
     GPT-4o & Low vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
     GPT-4o & Medium vs High & 20/20 & -0.96 & \textbf{$<$0.001} \\
-    Llama-3.1 & Baseline vs Low & 20/20 & +0.53 & \textbf{0.004} \\
-    Llama-3.1 & Baseline vs Medium & 20/20 & -0.74 & \textbf{$<$0.001} \\
-    Llama-3.1 & Baseline vs High & 20/20 & -0.99 & \textbf{$<$0.001} \\
-    Llama-3.1 & Low vs Medium & 20/20 & -0.83 & \textbf{$<$0.001} \\
-    Llama-3.1 & Low vs High & 20/20 & -0.97 & \textbf{$<$0.001} \\
-    Llama-3.1 & Medium vs High & 20/20 & -0.87 & \textbf{$<$0.001} \\
-    Ministral-8B & Baseline vs Low & 20/20 & +0.19 & 0.562 \\
-    Ministral-8B & Baseline vs Medium & 20/20 & -0.51 & \textbf{0.011} \\
-    Ministral-8B & Baseline vs High & 20/20 & -0.67 & \textbf{$<$0.001} \\
-    Ministral-8B & Low vs Medium & 20/20 & -0.52 & \textbf{0.011} \\
-    Ministral-8B & Low vs High & 20/20 & -0.62 & \textbf{0.002} \\
-    Ministral-8B & Medium vs High & 20/20 & -0.15 & 0.562 \\
-    Qwen-2.5 & Baseline vs Low & 20/20 & +0.10 & 0.612 \\
-    Qwen-2.5 & Baseline vs Medium & 20/20 & -0.97 & \textbf{$<$0.001} \\
-    Qwen-2.5 & Baseline vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
-    Qwen-2.5 & Low vs Medium & 20/20 & -0.91 & \textbf{$<$0.001} \\
-    Qwen-2.5 & Low vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
-    Qwen-2.5 & Medium vs High & 20/20 & -0.80 & \textbf{$<$0.001} \\
+    Llama 3.1 8B & Baseline vs Low & 20/20 & +0.53 & \textbf{0.004} \\
+    Llama 3.1 8B & Baseline vs Medium & 20/20 & -0.74 & \textbf{$<$0.001} \\
+    Llama 3.1 8B & Baseline vs High & 20/20 & -0.99 & \textbf{$<$0.001} \\
+    Llama 3.1 8B & Low vs Medium & 20/20 & -0.83 & \textbf{$<$0.001} \\
+    Llama 3.1 8B & Low vs High & 20/20 & -0.97 & \textbf{$<$0.001} \\
+    Llama 3.1 8B & Medium vs High & 20/20 & -0.87 & \textbf{$<$0.001} \\
+    Ministral 8B & Baseline vs Low & 20/20 & +0.19 & 0.562 \\
+    Ministral 8B & Baseline vs Medium & 20/20 & -0.51 & \textbf{0.011} \\
+    Ministral 8B & Baseline vs High & 20/20 & -0.67 & \textbf{$<$0.001} \\
+    Ministral 8B & Low vs Medium & 20/20 & -0.52 & \textbf{0.011} \\
+    Ministral 8B & Low vs High & 20/20 & -0.62 & \textbf{0.002} \\
+    Ministral 8B & Medium vs High & 20/20 & -0.15 & 0.562 \\
+    Qwen 2.5 7B & Baseline vs Low & 20/20 & +0.10 & 0.612 \\
+    Qwen 2.5 7B & Baseline vs Medium & 20/20 & -0.97 & \textbf{$<$0.001} \\
+    Qwen 2.5 7B & Baseline vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
+    Qwen 2.5 7B & Low vs Medium & 20/20 & -0.91 & \textbf{$<$0.001} \\
+    Qwen 2.5 7B & Low vs High & 20/20 & -1.00 & \textbf{$<$0.001} \\
+    Qwen 2.5 7B & Medium vs High & 20/20 & -0.80 & \textbf{$<$0.001} \\
     \bottomrule
   \end{tabular}
 \end{table}

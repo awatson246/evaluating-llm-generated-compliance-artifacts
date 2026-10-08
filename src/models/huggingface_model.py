@@ -9,12 +9,10 @@ from .base_model import BaseModel, ModelResponse
 
 logger = logging.getLogger(__name__)
 
-# Conservative per-model context limits (input + output combined)
+# Context limits (input + output combined) for models without a config
+# `context_limit`. Llama's comes from config because it depends on the backend.
 HF_CONTEXT_LIMITS: dict[str, int] = {
-    "meta-llama/Llama-3.1-8B-Instruct": 32_768,
-    "meta-llama/Llama-3.1-70B-Instruct": 131_072,
-    "mistralai/Mixtral-8x7B-Instruct-v0.1": 32_768,
-    "Qwen/Qwen2.5-72B-Instruct": 131_072,
+    "Qwen/Qwen2.5-7B-Instruct": 32_768,
 }
 
 DEFAULT_CONTEXT_LIMIT = 32_768
